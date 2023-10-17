@@ -4,25 +4,23 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-
+options.tableName = "Users";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn('Users', 'firstName', {
+    await queryInterface.addColumn(options, 'firstName', {
       type: Sequelize.STRING,
       allowNull: false,
     }),
-    await queryInterface.addColumn('Users', 'lastName', {
+    await queryInterface.addColumn(options, 'lastName', {
       type: Sequelize.STRING,
       allowNull: false,
     }, options)
   },
 
   async down (queryInterface, Sequelize) {
-    options.tableName = "Users";
-    options.columnName = 'firstName'
-   await queryInterface.removeColumn(options)
-    options.columnName = 'lastName'
-   await queryInterface.removeColumn(options)
+
+   await queryInterface.removeColumn(options, 'firstName')
+   await queryInterface.removeColumn(options, 'lastName')
   }
 };
