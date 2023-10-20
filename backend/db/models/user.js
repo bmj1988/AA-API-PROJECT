@@ -11,7 +11,11 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      User.hasMany(models.Spot, {foreignKey: 'ownerId'})
+
+      User.hasMany(models.Booking, {foreignKey: 'userId'})
+
+      User.hasMany(models.Review, {foreignKey: 'userId'})
     }
   }
   User.init({
@@ -46,10 +50,16 @@ module.exports = (sequelize, DataTypes) => {
     firstName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isAlpha: true,
+      }
     },
     lastName: {
       type: DataTypes.STRING,
       allowNull: false,
+      validate: {
+        isAlpha: true,
+      }
     }
   }, {
     sequelize,

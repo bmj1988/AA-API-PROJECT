@@ -51,6 +51,7 @@ router.post(
   );
 
 module.exports = router;
+//FOR TESTING
 
 // fetch('/api/users', {
 //   method: 'GET',
