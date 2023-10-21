@@ -68,4 +68,21 @@ const setTokenCookie = (res, user) => {
     return next(err);
   }
 
-  module.exports = { setTokenCookie, restoreUser, requireAuth };
+  const userMatch = function (reqUser, instanceUser, model) {
+    if (reqUser !== instanceUser) {
+      const err = new Error(`You are unauthorized to access this ${model}`)
+      err.status = 401
+      err.title = 'Unauthorized'
+      return next(err)
+    }
+  }
+
+  const exists = function (check, model) {
+    if (!check || check.length === 0) {
+      const err = new Error(`${model} couldn't be found`)
+      err.status = 404
+      return next(err)
+    }
+  }
+
+  module.exports = { setTokenCookie, restoreUser, requireAuth, userMatch, exists };

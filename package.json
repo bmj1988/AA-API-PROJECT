@@ -13,5 +13,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "postgresql": "^0.0.1",
+    "postgresql-client": "^2.9.1"
+  }
 }

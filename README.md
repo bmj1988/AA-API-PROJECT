@@ -1,9 +1,7 @@
 # `AirBnB API PROJECT`
 
 ## Database Schema Design
-
-![db-schema](<backend/AA API PROJECT (2).png>)
-
+![db-schema](<backend/AA API PROJECT (4).png>)
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION
