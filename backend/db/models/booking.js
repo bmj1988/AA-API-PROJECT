@@ -25,19 +25,27 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false
     },
     startDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
         isDate: true,
-        isBefore: this.endDate,
+        StartBeforeEnd() {
+          if (this.startDate > this.endDate) {
+            throw new Error('Start must be before end!')
+          }
+        },
+        StartAfterNow(value) {
+          if (new Date(value) < (new Date())) {
+            throw new Error('Please choose a valid date for your stay!')
+          }
+        }
       }
     },
     endDate: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
       allowNull: false,
       validate: {
         isDate: true,
-        isAfter: this.startDate,
       }}
   }, {
     sequelize,

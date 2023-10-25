@@ -15,16 +15,18 @@ module.exports = (sequelize, DataTypes) => {
       Spot.hasMany(models.Review, {foreignKey: 'spotId'})
 
       Spot.hasMany(models.Image, {foreignKey: 'imageableId'})
+
+      Spot.hasMany(models.Booking, {foreignKey: 'spotId'})
     }
   }
   Spot.init({
     address: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        isAlphanumeric: true,
         addressChecker(value) {
-          splitAddy = value.split(' ')
+          let splitAddy = value.split(' ')
           if (!Validator.isNumeric(splitAddy[0]) || !Validator.isAlpha(splitAddy[1])) {
             throw new Error('Must provide valid address!')
           }
@@ -41,21 +43,15 @@ module.exports = (sequelize, DataTypes) => {
     city: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true
-      }},
+    },
     state: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true,
-      }},
+      },
     country: {
       type: DataTypes.STRING,
       allowNull: false,
-      validate: {
-        isAlpha: true,
-      }},
+      },
     lat: {
       type: DataTypes.DECIMAL,
       allowNull: false,
@@ -72,9 +68,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       defaultValue: [this.address, this.city, this.state].join(', '),
-      validate: {
-        isAlphanumeric: true,
-      }},
+      },
     price: {
       type: DataTypes.DECIMAL,
     },

@@ -2,7 +2,6 @@
 const {
   Model, Validator
 } = require('sequelize');
-const { Sequelize } = require('.');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     /**
