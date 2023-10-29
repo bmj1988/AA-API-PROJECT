@@ -1,11 +1,9 @@
 const express = require('express');
-const bcrypt = require('bcryptjs');
-const { check } = require('express-validator');
-const { setTokenCookie, requireAuth, restoreUser, userMatch, exists, info, requireAuthorizeSpot, authorizeReview } = require('../../utils/auth');
+const { requireAuth, restoreUser, userMatch, exists, info, requireAuthorizeSpot, authorizeReview } = require('../../utils/auth');
 const { queryParser, avgRater, numReviews } = require('../../utils/queryParser')
 const router = express.Router();
 const Sequelize = require('sequelize')
-const {checkBookingConflictsSPOT, checkBookingConflictsBOOKING} = require('../../utils/bookingChecker')
+const {checkBookingConflictsSPOT} = require('../../utils/bookingChecker')
 const { Spot, User, Image, Review, sequelize } = require('../../db/models')
 const Op = Sequelize.Op;
 
@@ -102,7 +100,7 @@ router.get('/:spotId', [info, exists], async (req, res, next) => {
 
 router.post('/', requireAuth, async (req, res) => {
     const user = req.user
-    const newSpot = await user.createSpot(req.body)
+    const newSpot = await user.createSpot(req.body, {validate: true})
     return res.json(newSpot)
 })
 
@@ -156,17 +154,6 @@ router.put('/:spotId', [requireAuth, requireAuthorizeSpot], async (req, res, nex
 
 router.delete('/:spotId', [requireAuth, requireAuthorizeSpot], async (req, res, next) => {
     const doomSpot = await Spot.findByPk(req.params.spotId)
-    if (!doomSpot) {
-        const err = new Error(`Spot couldn't be found`)
-        err.status = 404
-        return next(err)
-    }
-    else if (doomSpot.ownerId !== req.user.id) {
-        const err = new Error(`You can only delete spots that are owned by you`)
-        err.status = 401
-        err.title = 'Unauthorized'
-        return next(err)
-    }
     await doomSpot.destroy()
     res.json({ message: 'Successfully deleted' })
 })
@@ -192,18 +179,15 @@ router.get('/:spotId/reviews',[info, exists], async (req, res) => {
 
 ///CREATE REVIEW BY SPOT ID
 
-router.post('/:spotId/reviews', requireAuth, async (req, res, next) => {
+router.post('/:spotId/reviews', [requireAuth, info, exists], async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
-    if (!spot) {
-        res.status(404).json({ message: `Spot couldn't be found` })
-    }
+    if (spot.ownerId === req.user.id) res.status(403).json({message: `You cannot review your own spots!`})
     const reviews = await Review.findAll({
         where: {
             spotId: spot.id,
             userId: req.user.id
         }
     })
-    console.log(reviews)
     if (reviews.length > 1) return res.status(400).json({ message: `User already has a review for this spot` })
     const review = await spot.createReview({
         userId: req.user.id,

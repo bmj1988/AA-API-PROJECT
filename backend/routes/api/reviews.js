@@ -1,9 +1,5 @@
 const express = require('express');
-const { Op } = require('sequelize');
-const bcrypt = require('bcryptjs');
-const { check } = require('express-validator');
-const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, restoreUser, requireAuth, authorizeReview, exists } = require('../../utils/auth');
+const { restoreUser, requireAuth, authorizeReview } = require('../../utils/auth');
 const { User, Spot, Review, Image } = require('../../db/models');
 
 const router = express.Router();
@@ -13,8 +9,7 @@ router.use(restoreUser)
 /// GET ALL REVIEW BY USER ID (CURRENT USER)
 
 router.get('/current', requireAuth, async (req, res) => {
-    const id = req.user.id
-    const user = await User.findByPk(id)
+    const user = await User.findByPk(req.user.id)
     const reviews = await user.getReviews(
         {
             include: [{
@@ -62,14 +57,6 @@ router.post('/:reviewId/images', [requireAuth, authorizeReview], async (req, res
 
 router.put('/:reviewId', [requireAuth, authorizeReview], async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId)
-    if (!review) {
-        res.json({message: `Review couldn't be found`})
-    }
-    else if (review.userId !== req.user.id) {
-        const err = new Error('Can only edit your own reviews!')
-        err.status = 401
-        return next(err)
-    }
     await review.update(req.body)
     res.json(review)
 })
