@@ -50,7 +50,6 @@ router.get('/', queryParser, async (req, res) => {
 
 router.get('/current', requireAuth, async (req, res, next) => {
     const user = await User.findByPk(parseInt(req.user.id))
-    const spotReturn = []
     const spots = await user.getSpots({
         include: [{
             model: Review,
