@@ -3,8 +3,8 @@ const { Op } = require('sequelize');
 const bcrypt = require('bcryptjs');
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
-const { setTokenCookie, restoreUser, requireAuth } = require('../../utils/auth');
-const { User, Spot, Review } = require('../../db/models');
+const { setTokenCookie, restoreUser, requireAuth, authorizeReview, exists } = require('../../utils/auth');
+const { User, Spot, Review, Image } = require('../../db/models');
 
 const router = express.Router();
 
@@ -13,55 +13,57 @@ router.use(restoreUser)
 /// GET ALL REVIEW BY USER ID (CURRENT USER)
 
 router.get('/current', requireAuth, async (req, res) => {
-    /// STOPGAP -- NEED TO FIND METHOD TO GRAB CURRENT USER LOGIN CREDS
     const id = req.user.id
     const user = await User.findByPk(id)
     const reviews = await user.getReviews(
-        {include: [{
-            model: Spot
-        },{
-            model: Image
+        {
+            include: [{
+                model: Spot,
+                attributes: {
+                    exclude: ['createdAt', 'updatedAt']
+                }
+            }, {
+                model: Image,
+                as: 'ReviewImages',
+                attributes: ['id', 'url']
+            }, {
+                model: User,
+                attributes: ['id', 'firstName', 'lastName']
+            }
+            ]
         }
-    ]}
     )
     res.json(reviews)
 })
 
 /// POST AN IMAGE TO REVIEW
 
-router.post('/:reviewId/images', requireAuth, async (req, res) => {
+router.post('/:reviewId/images', [requireAuth, authorizeReview], async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId)
-    if (!review) {
-        const err = new Error('Could not find requested review')
-        err.status = 404
-        return next(err)
+    const allPix = await Image.findAll({
+        where: {
+            imageableId: review.id,
+            imageableType: 'Review'
+        }
+    })
+
+    if (await allPix.length >= 10) {
+        return res.status(403).json({ message: 'Maximum number of images for this resource was reached' })
     }
-    else if (review.userId !== req.user.id) {
-        const err = new Error('Can only add images to your own reviews!')
-        err.status = 401
-        return next(err)
-    }
-    else if (review.getImages().length > 10) {
-        const err = new Error('Maximum number of images for this resource was reached')
-        err.status = 403
-        return next(err)
-    }
-    const addedImageReview = await review.createImage({
+    const addedImageReview = await review.createReviewImage({
         url: req.body.url,
         imageableType: 'Review',
 
     })
-    res.json({id: addedImageReview.id, url: addedImageReview.url})
+    res.json({ id: addedImageReview.id, url: addedImageReview.url })
 })
 
 /// EDIT A REVIEW
 
-router.put('/:reviewId', requireAuth, async (req, res) => {
+router.put('/:reviewId', [requireAuth, authorizeReview], async (req, res, next) => {
     const review = await Review.findByPk(req.params.reviewId)
     if (!review) {
-        const err = new Error(`Review couldn't be found`)
-        err.status = 404
-        return next(err)
+        res.json({message: `Review couldn't be found`})
     }
     else if (review.userId !== req.user.id) {
         const err = new Error('Can only edit your own reviews!')
@@ -74,20 +76,10 @@ router.put('/:reviewId', requireAuth, async (req, res) => {
 
 /// DELETE A REVIEW
 
-router.delete('/:reviewId', requireAuth, async (req, res) => {
+router.delete('/:reviewId', [requireAuth, authorizeReview], async (req, res, next) => {
     const doomReview = await Review.findByPk(req.params.reviewId)
-    if (!doomReview) {
-        const err = new Error(`Review couldn't be found`)
-        err.status = 404
-        return next(err)
-    }
-    else if (doomReview.userId !== req.user.id) {
-        const err = new Error('Can only delete your own reviews!')
-        err.status = 401
-        return next(err)
-    }
     await doomReview.destroy()
-    res.json({message: 'Successfully deleted'})
+    res.json({ message: 'Successfully deleted' })
 })
 
 

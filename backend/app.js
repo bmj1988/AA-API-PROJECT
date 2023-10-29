@@ -35,6 +35,14 @@ app.use(
         }
     })
 )
+app.use('*spot-images*', (req, res, next) => {
+    req.imageType = 'spot'
+    next()
+})
+app.use('*review-images*', (req, res, next) => {
+    req.imageType = 'review'
+    next()
+})
 app.use(routes)
 
 app.use((_req, _res, next) => {
@@ -62,14 +70,15 @@ app.use((err, _req, _res, next) => {
 });
 
 app.use((err, _req, res, _next) => {
+    if (err.title === 'Validation error') err.status = 400
     res.status(err.status || 500);
     console.error(err);
     res.json({
-      title: err.title || 'Server Error',
-      message: err.message,
-      errors: err.errors,
-      stack: isProduction ? null : err.stack
+        // title: err.title || 'Server Error',
+        message: err.title ? err.title : err.message,
+        errors: err.errors,
+        stack: isProduction ? null : err.stack
     });
-  })
+})
 
 module.exports = app;

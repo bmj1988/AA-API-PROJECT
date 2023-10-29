@@ -12,10 +12,12 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       Image.belongsTo(models.Review, {
         foreignKey: 'imageableId',
+        as: 'ReviewImages',
         constraints: false
       });
       Image.belongsTo(models.Spot, {
         foreignKey: 'imageableId',
+        as: 'SpotImages',
         constraints: false
       });
       Image.addHook('afterFind', async (results, options) => {
@@ -46,7 +48,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     imageableType: {
       type: DataTypes.ENUM('Review', 'Spot'),
-      allowNull: false
+      allowNull: false,
     },
     url: {
       type: DataTypes.STRING,
@@ -59,7 +61,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.BOOLEAN,
       validate: {
          notNullIfSpot(value) {
-          if (this.imageableType === 'Spot' && value === null) {
+          if (this.imageableType === 'Spot' && typeof value !== 'boolean') {
             throw new Error('Preview value cannot be null if image is for a Spot!')
           }
          }

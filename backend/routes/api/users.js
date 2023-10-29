@@ -29,7 +29,7 @@ const router = express.Router();
 /// signup a new user
 router.post(
   '/', validateSignup,
-  async (req, res) => {
+  async (req, res, next) => {
     const { email, password, username, firstName, lastName } = req.body;
     const hashedPassword = bcrypt.hashSync(password);
     const emailExists = await User.findOne({
@@ -76,28 +76,3 @@ router.post(
 );
 
 module.exports = router;
-//FOR TESTING
-
-// fetch('/api/users', {
-//   method: 'GET',
-//   headers: {
-//     "Content-Type": "application/json",
-//     "XSRF-TOKEN": `Vi9vnoFy-mULS_gHyLpzD5T7e4WerFRhW924`
-//   },
-//   body: JSON.stringify({
-//     email: 'firestar@spider.man',
-//     username: 'fooblestar',
-//     password: 'omghellohi',
-//     firstName: 'breeble',
-//     lastName: 'brooble'
-//   })
-// }).then(res => res.json()).then(data => console.log(data))
-
-// fetch('/api/session', {
-//   method: 'POST',
-//   headers: {
-//     "Content-Type": "application/json",
-//     "XSRF-TOKEN": `Vi9vnoFy-mULS_gHyLpzD5T7e4WerFRhW924`
-//   },
-//   body: JSON.stringify({ credential: 'fooblestar', password: 'omghellohi' })
-// }).then(res => res.json()).then(data => console.log(data));

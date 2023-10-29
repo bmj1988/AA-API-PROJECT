@@ -16,6 +16,7 @@ module.exports = (sequelize, DataTypes) => {
 
       Review.hasMany(models.Image, {
         foreignKey: 'imageableId',
+        as: 'ReviewImages',
         constraints: false,
         scope: {
           imageableType: 'Review'
@@ -35,10 +36,17 @@ module.exports = (sequelize, DataTypes) => {
     review: {
       type: DataTypes.TEXT,
       allowNull: false,
+      validate: {
+        notEmpty: {args: true, msg: 'Review text is required'}
+      }
     },
     stars: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      validate: {
+        min: {args: 1, msg: 'Stars must be an integer from 1 to 5' },
+        max: {args: 5, msg: 'Stars must be an integer from 1 to 5' }
+      }
     }
   }, {
     sequelize,
