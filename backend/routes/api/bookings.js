@@ -7,6 +7,7 @@ const { Spot, User, Booking } = require('../../db/models')
 router.use(restoreUser)
 
 /// GET ALL BOOKINGS MADE BY CURRENT USER
+///looks like i'm going to be adding some stuff.
 router.get('/current', requireAuth, async (req, res, next) => {
     const user = await User.findByPk(req.user.id)
     const bookings = await user.getBookings({
