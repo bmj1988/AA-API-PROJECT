@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class Spot extends Model {
@@ -95,18 +95,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     price: {
       type: DataTypes.DECIMAL,
-      allowNull: false,
-      validate: {
-        min : 0.01,
-        notNull: {msg: 'Price is required'}
-      }
     },
     previewImage: {
       type: DataTypes.STRING,
       defaultValue: null,
-      validate: {
-        isUrl: {args: true, msg: 'Preview Image must have a valid URL'}
-      }
     }
   }, {
     sequelize,

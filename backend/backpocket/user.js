@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, Validator
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: {args: [4, 30], msg: 'Username must be between 4 and 30 characters'},
+        len: [4, 30],
         isNotEmail(value) {
           if (Validator.isEmail(value) === true) {
             throw new Error('Cannot have email for username!')
@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      unique: {args: true, msg: 'This email address belongs to another account'},
+      unique: true,
       validate: {
-        len: {args: [3, 256], msg: 'Email length must be between 3 and 256 characters'},
-        isEmail: {args: true, msg: 'Must provide a valid email!'}
+        len: [3, 256],
+        isEmail: true
       }
     },
     hashedPassword: {
@@ -48,16 +48,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: {args: false, msg: 'First name must not be null'},
+      allowNull: false,
       validate: {
-        isAlpha: {args: true, msg: 'Must provide a real first name'},
+        isAlpha: true,
       }
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: {args: false, msg: 'Last name must not be null'},
+      allowNull: false,
       validate: {
-        isAlpha: {args: true, msg: 'Must provide a real last name'},
+        isAlpha: true,
       }
     }
   }, {
@@ -68,6 +68,7 @@ module.exports = (sequelize, DataTypes) => {
         exclude: ["hashedPassword", "email", "createdAt", "updatedAt"]
       }
     }
-  });
+  }
+  );
   return User;
 };
