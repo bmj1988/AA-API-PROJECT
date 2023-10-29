@@ -27,12 +27,12 @@ const queryParser = async function (req, res, next) {
 }
 
 const avgRater = async function (spotId) {
-    let avgRating = await sequelize.query(`SELECT ROUND(AVG(stars), 2) from "aa_api_project_schema"."Reviews" WHERE spotId = ${spotId}`)
+    let avgRating = await sequelize.query(`SELECT ROUND(AVG(stars), 2) from "aa_api_project_schema"."Reviews" WHERE "spotId" = ${spotId}`)
         avgRating = Object.values(avgRating[0][0])
         return avgRating[0]
 }
 const numReviews = async function (spotId) {
-    let count = await sequelize.query(`SELECT COUNT(*) from "aa_api_project_schema"."Reviews" WHERE spotId = ${spotId}`)
+    let count = await sequelize.query(`SELECT COUNT(*) from "aa_api_project_schema"."Reviews" WHERE "spotId" = ${spotId}`)
     count = Object.values(count[0][0])
     return count[0]
 }
