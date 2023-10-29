@@ -30,8 +30,7 @@ router.get('/', queryParser, async (req, res) => {
     })
 
     for (let spot of spots) {
-        let avgRating = await sequelize.query(`SELECT ROUND(AVG(stars), 2) from Reviews WHERE spotId = ${spot.id}`)
-        avgRating = await avgRater(spot.id)
+        let avgRating = await avgRater(spot.id)
         const spotObj = {
             ...spot.dataValues,
             avgRating: avgRating
@@ -188,7 +187,7 @@ router.post('/:spotId/reviews', [requireAuth, info, exists], async (req, res, ne
             userId: req.user.id
         }
     })
-    if (reviews.length > 1) return res.status(400).json({ message: `User already has a review for this spot` })
+    if (reviews.length >= 1) return res.status(400).json({ message: `User already has a review for this spot` })
     const review = await spot.createReview({
         userId: req.user.id,
         ...req.body
