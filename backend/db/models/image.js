@@ -13,11 +13,13 @@ module.exports = (sequelize, DataTypes) => {
       Image.belongsTo(models.Review, {
         foreignKey: 'imageableId',
         as: 'ReviewImages',
+        onDelete: 'CASCADE',
         constraints: false
       });
       Image.belongsTo(models.Spot, {
         foreignKey: 'imageableId',
         as: 'SpotImages',
+        onDelete: 'CASCADE',
         constraints: false
       });
       Image.addHook('afterFind', async (results, options) => {
