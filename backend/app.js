@@ -73,11 +73,15 @@ app.use((err, _req, res, _next) => {
     if (err.title === 'Validation error') err.status = 400
     res.status(err.status || 500);
     console.error(err);
-    res.json({
+    if (isProduction) res.json({
+        message: err.title ? err.title : err.message,
+        errors: err.errors
+    })
+    else res.json({
         // title: err.title || 'Server Error',
         message: err.title ? err.title : err.message,
         errors: err.errors,
-        stack: isProduction ? null : err.stack
+        stack: err.stack
     });
 })
 
