@@ -100,7 +100,12 @@ router.get('/:spotId', [info, exists], async (req, res, next) => {
 router.post('/', requireAuth, async (req, res) => {
     const user = req.user
     const newSpot = await user.createSpot(req.body, {validate: true})
-    return res.json(newSpot)
+    const displaySpot = await Spot.findByPk(newSpot.id, {
+        attributes: {
+            exclude: ['previewImage']
+        }
+    })
+    return res.json(displaySpot)
 })
 
 /// ADD IMAGE TO SPOTS
