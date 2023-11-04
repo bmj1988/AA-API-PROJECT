@@ -17,6 +17,13 @@ router.get('/', queryParser, async (req, res) => {
     console.log(req.minLat)
     const spotsArray = []
     const query = {}
+    const returbObj = {};
+    if (req.query.size) {
+        returbObj.size = req.query.size
+    }
+    if (req.query.page) {
+        returbObj.page = req.query.page
+    }
     query.limit = req.querySize;
     query.offset = req.querySize * (req.queryPage - 1)
     const spots = await Spot.findAll({
@@ -40,7 +47,7 @@ router.get('/', queryParser, async (req, res) => {
 
 
 
-    res.json({Spots: spotsArray})
+    res.json({Spots: spotsArray, ...returbObj})
 })
 
 /// GET ALL SPOTS WHERE CURRENT (LOGGED IN) USER ID = SPOTS.OWNERID
