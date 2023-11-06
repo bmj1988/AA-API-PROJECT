@@ -185,7 +185,7 @@ router.get('/:spotId/reviews',[info, exists], async (req, res) => {
         }]
     })
 
-    res.json(reviews)
+    res.json({Reviews: reviews})
 })
 
 ///CREATE REVIEW BY SPOT ID

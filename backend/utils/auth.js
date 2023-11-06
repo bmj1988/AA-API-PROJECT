@@ -149,7 +149,7 @@ const imageChecker = async function (req, res, next) {
   }
   if (req.imageType === 'review') {
     const reviewImage = await Image.findByPk(req.params.imageId)
-    const review = Review.findByPk(reviewImage.imageableId)
+    const review = await Review.findByPk(reviewImage.imageableId)
     if (req.user.id !== review.userId) return res.status(403).json({message: `Cannot delete review images for other users' reviews.`})
   }
   return next()
