@@ -28,7 +28,7 @@ router.get('/current', requireAuth, async (req, res) => {
             ]
         }
     )
-    res.json(reviews)
+    res.json({Reviews: reviews})
 })
 
 /// POST AN IMAGE TO REVIEW
