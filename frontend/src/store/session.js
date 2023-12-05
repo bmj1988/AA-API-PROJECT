@@ -29,7 +29,7 @@ export const thunkLogin = (credentials) => async (dispatch) => {
         return userInfo
     }
     else {
-        const err = await loginResponse.json();
+        const err = loginResponse
         throw err
     }
 }
