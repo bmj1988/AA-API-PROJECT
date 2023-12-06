@@ -1,16 +1,24 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { thunkLogin } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import './LoginForm.css';
 
 
 
 const LoginFormPage = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const userSelector = useSelector(state => state.session.user)
     const [password, setPassword] = useState('');
     const [credential, setCredential] = useState('');
     const [errors, setErrors] = useState({})
+    useEffect(() => {
+        if (userSelector) {
+            navigate('/')
+        }
+    }, [userSelector, navigate])
+
     const onSubmit = async (e) => {
         e.preventDefault();
         const credentials = {
@@ -25,20 +33,22 @@ const LoginFormPage = () => {
         }
         catch (e) {
             const error = await e.json();
-            setErrors(error);
+            setErrors(error.errors);
         }
 
     }
 
     return (
         <form onSubmit={onSubmit}>
-            <fieldset>
+            <fieldset className={'legend'}>
                 <label htmlFor="usernameOrEmail">Username or Email Address: </label>
-                <input name='usernameOrEmail' type='text' onChange={(e) => setCredential(e.target.value)} />
+                <input name='usernameOrEmail' type='text'  className={'loginPuts'} onChange={(e) => setCredential(e.target.value)} />
+                <br/>
                 <label htmlFor='password'>Password:</label>
-                <input name='password' type='password' onChange={(e) => setPassword(e.target.value)} />
+                <input name='password' type='password' className={'loginPuts'} onChange={(e) => setPassword(e.target.value)} />
+                <br/>
                 <button> LOGIN </button>
-                {Object.values(errors).length > 0 && (<p>{errors.message}</p>)}
+                {Object.values(errors).length > 0 && Object.values(errors).map(error => <p key={error} className={'errors'}>{error}</p>)}
             </fieldset>
         </form>
     )

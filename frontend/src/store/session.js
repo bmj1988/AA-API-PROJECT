@@ -34,12 +34,80 @@ export const thunkLogin = (credentials) => async (dispatch) => {
     }
 }
 
+export const thunkRestoreUser = () => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/session`)
+        if (response.ok) {
+            const userInfo = await response.json();
+            console.log(`!!!!!!!!!!!\n`, userInfo)
+            await dispatch(setUser(userInfo));
+            return userInfo
+        }
+        else {
+            throw response
+        }
+    }
+    catch (responseError) {
+        const error = await responseError.json()
+        return error
+    }
+}
 
-const sessionReducer = (state = {user: null}, action) => {
-    const sessionState = {...state}
+export const thunkCreateUser = (newUserInfo) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(newUserInfo)
+        })
+
+        if (response.ok) {
+            const userInfo = await response.json();
+            await dispatch(setUser(userInfo));
+            return userInfo
+        }
+        else {
+            throw response
+        }
+    }
+    catch (e) {
+        const error = e.json();
+        return error
+    }
+}
+
+export const thunkLogout = () => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/session`, {
+            method: 'DELETE',
+        })
+        if (response.ok) {
+            const deleteOk = await response.json();
+            await dispatch(removeUser())
+            return deleteOk
+        }
+        else {
+            throw response
+        }
+    }
+    catch (e) {
+        const error = await e.json();
+        return error
+    }
+}
+
+const sessionReducer = (state = { user: null }, action) => {
+    let sessionState = { ...state }
     switch (action.type) {
         case SETUSER: {
-            sessionState.user = action.user;
+            console.log(`!!!!!!!!!-----`, action.user)
+            if (action.user.user === null) {
+                sessionState = {user: null}
+                return sessionState
+            }
+            sessionState.user = { ...action.user.user };
             return sessionState
         }
         case REMOVE_USER: {
