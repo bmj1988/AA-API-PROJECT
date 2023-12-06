@@ -2,11 +2,11 @@ import { useState } from 'react'
 import './SignupForm.css'
 import { thunkCreateUser } from '../../store/session'
 import { useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useModal } from '../../context/Modal'
 
-const SignupForm = () => {
+const SignupFormModal = () => {
+    const { closeModal } = useModal();
     const dispatch = useDispatch();
-    const navigate = useNavigate();
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [username, setUsername] = useState('')
@@ -34,9 +34,7 @@ const SignupForm = () => {
                 setErrors(res.errors)
                 return
             }
-            console.log(res)
-            navigate('/')
-            return
+            closeModal();
         }
     }
 
@@ -70,4 +68,4 @@ const SignupForm = () => {
         </>
     )
 }
-export default SignupForm
+export default SignupFormModal

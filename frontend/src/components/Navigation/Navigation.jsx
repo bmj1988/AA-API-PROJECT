@@ -4,6 +4,7 @@ import Icon from './ProfileButton'
 import './Navigation.css'
 import OpenModalButton from '../OpenModalButton/OpenModalButton'
 import LoginFormModal from '../LoginFormModal/LoginFormModal'
+import SignupFormModal from '../SignupFormModal/SignupFormModal'
 
 const NavBar = ({ userFetched }) => {
     const sessionState = useSelector(state => state.session.user)
@@ -14,18 +15,7 @@ const NavBar = ({ userFetched }) => {
                 <li>
                     <NavLink to='/'>Home</NavLink>
                 </li>
-                {(!sessionState && userFetched) && (
-                    <>
-                        <li>
-                            <NavLink to='/signup'>Sign up</NavLink>
-                        </li>
-                        <li>
-                            <OpenModalButton buttonText={'Log In'} modalComponent={<LoginFormModal/>}/>
-                        </li>
-                    </>
-                )
-                }
-                {(sessionState && userFetched) && (
+                {userFetched && (
                     <li>
                         <Icon user={sessionState} />
                     </li>
