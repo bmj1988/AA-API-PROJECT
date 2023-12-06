@@ -1,19 +1,12 @@
 import { NavLink } from 'react-router-dom'
-import { useSelector, useDispatch } from 'react-redux'
-import { thunkLogout } from '../../store/session'
+import { useSelector } from 'react-redux'
 import Icon from './ProfileButton'
-
+import './Navigation.css'
+import OpenModalButton from '../OpenModalButton/OpenModalButton'
+import LoginFormModal from '../LoginFormModal/LoginFormModal'
 
 const NavBar = ({ userFetched }) => {
-    const dispatch = useDispatch();
     const sessionState = useSelector(state => state.session.user)
-    const logout = async (e) => {
-        e.preventDefault();
-        const logoutReceived = await dispatch(thunkLogout);
-        if (logoutReceived.message) {
-            alert(logoutReceived.message);
-        }
-    }
 
     return (
         <nav>
@@ -21,26 +14,21 @@ const NavBar = ({ userFetched }) => {
                 <li>
                     <NavLink to='/'>Home</NavLink>
                 </li>
-                {(sessionState.user === null && userFetched) && (
+                {(!sessionState && userFetched) && (
                     <>
                         <li>
                             <NavLink to='/signup'>Sign up</NavLink>
                         </li>
                         <li>
-                            <NavLink to='/login'> Login </NavLink>
+                            <OpenModalButton buttonText={'Log In'} modalComponent={<LoginFormModal/>}/>
                         </li>
                     </>
                 )
                 }
-                {(sessionState.user !== null && userFetched) && (
-                    <>
-                        <li>
-                            <Icon user={sessionState} />
-                        </li>
-                        <li>
-                            <button onClick={logout}>Log Out</button>
-                        </li>
-                    </>
+                {(sessionState && userFetched) && (
+                    <li>
+                        <Icon user={sessionState} />
+                    </li>
                 )
                 }
             </ul>

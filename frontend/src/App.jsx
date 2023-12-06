@@ -2,7 +2,7 @@ import { RouterProvider, createBrowserRouter, Outlet } from 'react-router-dom'
 import { useEffect, useState } from 'react';
 import { thunkRestoreUser } from './store/session';
 import { useDispatch } from 'react-redux';
-import LoginFormPage from './components/LoginFormPage/LoginFormPage';
+import LoginFormPage from './components/LoginFormModal/LoginFormModal';
 import SignupForm from './components/SignupForm/SignupForm';
 import NavBar from './components/Navigation/Navigation'
 
@@ -37,10 +37,6 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <h1>Welcome!</h1>
-      },
-      {
-        path: '/login',
-        element: <LoginFormPage />
       },
       {
         path: '/signup',
