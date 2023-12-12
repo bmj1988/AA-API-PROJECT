@@ -1,0 +1,26 @@
+.deleteContainer {
+    display: block;
+    width: 350px;
+    height: 300px;
+    padding: 10px;
+
+}
+
+.deleteButton {
+    display:flex;
+    margin: 25px auto;
+    font-size: 20px;
+    width: max-content;
+    padding: 20px;
+    border-radius: 10%
+}
+
+.deleteButton.yes {
+    background-color: salmon;
+    cursor: pointer;
+}
+
+.deleteButton.no {
+    background-color: #1bcdd0;
+    cursor: pointer;
+}

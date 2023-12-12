@@ -39,33 +39,20 @@ const SignupFormModal = () => {
     }
 
     return (
-        <>
-            <h1>New User Signup Form</h1>
-            <h2>Please enter your details below</h2>
-            <form onSubmit={onSubmit}>
-                <fieldset>
-                    <label htmlFor='firstName'>First Name: </label>
-                    <input name='firstName' type='text' className={`loginputs`} onChange={(e) => setFirstName(e.target.value)} />
-                    <br />
-                    <label htmlFor='lastName'>Last Name:</label>
-                    <input name='lastName' type='text' className={`loginputs`} onChange={(e) => setLastName(e.target.value)} />
-                    <br />
-                    <label htmlFor='email'>E-mail Address:</label>
-                    <input name='email' type='email' className={`loginputs`} onChange={(e) => setEmail(e.target.value)} />
-                    <br />
-                    <label htmlFor='username'>Desired username:</label>
-                    <input name='username' type='text' onChange={(e) => setUsername(e.target.value)} />
-                    <br />
-                    <label htmlFor='password'>Password: </label>
-                    <input name='password' type='password' className={`loginputs`} onChange={(e) => setPassword(e.target.value)} />
-                    <br />
-                    <label htmlFor='password'>Repeat Password:</label>
-                    <input name='passwordConfirm' type='password' className={`loginputs`} onChange={(e) => setConfirmPassword(e.target.value)} />
-                    <button>Sign Up</button>
-                    {Object.values(errors).length > 0 && Object.values(errors).map(error => <p className={'errors'} key={error}>{error}</p>)}
-                </fieldset>
+        <div className='signupDiv'>
+            <h1 className='signupHeader'>New User Signup Form</h1>
+            <form onSubmit={onSubmit} className="signupForm">
+                {Object.values(errors).length > 0 && Object.values(errors).map(error => <p className={'errors'} key={error}>{error}</p>)}
+                <input name='firstName' type='text' placeholder='First Name' className={`loginputs`} onChange={(e) => setFirstName(e.target.value)} />
+                <input name='lastName' type='text' placeholder='Last Name' className={`loginputs`} onChange={(e) => setLastName(e.target.value)} />
+                <input name='email' type='email' placeholder='Email' className={`loginputs`} onChange={(e) => setEmail(e.target.value)} />
+                <input name='username' type='text' placeholder='Username' className={`loginputs`} onChange={(e) => setUsername(e.target.value)} />
+                <input name='password' type='password' placeholder='Password' className={`loginputs`} onChange={(e) => setPassword(e.target.value)} />
+                <input name='passwordConfirm' type='password' placeholder='Confirm Password' className={`loginputs`} onChange={(e) => setConfirmPassword(e.target.value)} />
+                <button className='signupButton'>SIGN UP</button>
+
             </form>
-        </>
+        </div>
     )
 }
 export default SignupFormModal

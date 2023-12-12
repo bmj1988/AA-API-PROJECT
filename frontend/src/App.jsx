@@ -3,6 +3,8 @@ import { useEffect, useState } from 'react';
 import { thunkRestoreUser } from './store/session';
 import { useDispatch } from 'react-redux';
 import NavBar from './components/Navigation/Navigation'
+import Main from './components/Main/Main.jsx'
+import ManageSpots from './components/ManageSpotsModal/ManageSpots.jsx';
 
 
 const Layout = () => {
@@ -34,7 +36,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <h1>Welcome!</h1>
+        element: <Main/>
+      },
+      {
+        path: '/current',
+        element: <ManageSpots/>
       }
     ]
   },

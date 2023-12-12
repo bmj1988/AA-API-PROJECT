@@ -1,0 +1,80 @@
+.spotModalContainer {
+    max-width: 1000px;
+    font-family: 'DM Sans', sans-serif;
+    max-height: 1000px;
+    background: none;
+    padding: 10px;
+    overflow: auto;
+    margin: 20px;
+}
+
+.topLine {
+    display: block;
+    padding: 10px;
+}
+
+.imageDisplay {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-height: 400px;
+    width: 800px;
+    max-width: 1200px;
+    background: none;
+}
+
+.spotImage {
+    flex: 1;
+    transition-delay: 200ms;
+    transition-duration: 50ms;
+    width: 200px;
+    box-sizing: border-box;
+    border-radius: 10%;
+    padding: 5px;
+}
+
+.spotImage:nth-of-type(1) {
+    width: 400px;
+    height: 400px;
+}
+/* .spotImage:hover {
+    width: 400px;
+    height: 400px;
+    position: relative;
+} */
+
+.bio {
+    display: block;
+    width: 600px;
+}
+
+.starRating {
+    color: #1bcdd0;
+    font-size: 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.priceButtonInfo {
+    display: flex;
+    justify-content: space-between;
+}
+
+.priceButtonContainer {
+    width: 300px;
+    height: 200px;
+    display: block;
+}
+.buttonDiv {
+    display: flex;
+    justify-content: flex-start;
+    padding: 10px;
+
+}
+.reserveButton {
+    width: 200px;
+    height: 40px;
+    right: 80px;
+    margin-left:20px
+}

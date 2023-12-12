@@ -1,16 +1,16 @@
 import { useModal } from "../../context/Modal"
 
-const OpenModalMenuItem = ({modalComponent, itemText, onItemClick, onModalClose}) => {
-    const {setModalContent, setOnModalClose} = useModal();
+const OpenModalMenuItem = ({ modalComponent, itemText, onItemClick, onModalClose }) => {
+    const { setModalContent, setOnModalClose } = useModal();
 
     const handleClick = () => {
-        if (typeof onButtonClick === 'function') onItemClick();
+        if (typeof onItemClick === 'function') onItemClick();
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
     }
 
     return (
-        <li onClick={handleClick}>
+        <li style={{ cursor: 'pointer', display: 'flex' }} onClick={handleClick}>
             {itemText}
         </li>
     )

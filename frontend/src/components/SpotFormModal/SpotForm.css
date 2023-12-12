@@ -1,0 +1,63 @@
+.spotFormDiv {
+    display: block block;
+    width: 600px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    height: 800px;
+    padding: 30px;
+    margin: 25px;
+    overflow: auto;
+}
+
+div.location {
+    display: flex;
+}
+
+input.spotInput {
+    margin: 5px;
+}
+
+div.sectionContainer {
+    border-bottom: 1px solid gray;
+    display:block;
+    width: 500px;
+    margin:auto;
+
+}
+
+button.spotSend {
+    width: 150px;
+    height: 20px;
+    font-weight: bold;
+}
+
+textarea {
+    margin: 10px
+}
+
+.spotForm {
+    height: fit-content;
+
+}
+
+.button {
+    width:500px;
+    justify-content: center;
+    height: 50px;
+}
+
+.spotSend {
+    width: 100;
+    height: 40px;
+    justify-self: center;
+    align-self: center;
+}
+
+label {
+    display: block;
+}
+
+.errors {
+    color:red;
+    position: relative;
+}

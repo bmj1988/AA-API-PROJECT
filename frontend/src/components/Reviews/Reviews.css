@@ -1,0 +1,28 @@
+div.reviewContainer {
+    border-top: thick solid lightgray;
+    margin-top: 30px;
+
+}
+
+.reviewRunner {
+
+    display: flex;
+    width: 800px;
+    justify-content: space-between;
+}
+
+.starRating {
+    margin-left: 5px;
+}
+
+.textmark {
+    font-family: 'DM Sans', sans-serif;
+}
+
+.colormark {
+    color: #1bcdd0
+}
+
+.reviewText {
+    width: 400px
+}

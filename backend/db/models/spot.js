@@ -95,12 +95,15 @@ module.exports = (sequelize, DataTypes) => {
       },
     price: {
       type: DataTypes.DECIMAL,
+      validate: {
+        min : 0.00
+      }
     },
     previewImage: {
       type: DataTypes.STRING,
       defaultValue: null,
       validate: {
-        isUrl: true
+        isUrl: {args: true, msg: 'Preview Image must have a valid URL'}
       }
     }
   }, {

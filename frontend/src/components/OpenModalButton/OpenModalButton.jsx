@@ -10,7 +10,7 @@ const OpenModalButton = ({modalComponent, buttonText, onButtonClick, onModalClos
     }
 
     return (
-        <button onClick={handleClick}>
+        <button style={{cursor: 'pointer'}} onClick={handleClick}>
             {buttonText}
         </button>
     )

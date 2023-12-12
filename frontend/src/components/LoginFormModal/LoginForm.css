@@ -4,4 +4,40 @@
 
 .loginPuts {
     margin: 10px;
+    width: 350px;
+    height: 40px;
+    font-size: 18px;
+}
+
+.loginDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1bcdd0;
+    border-radius: 10%;
+}
+
+.formDiv {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 0 0 10% 10%;
+}
+
+h1 {
+    font-size: 30px;
+    font-family: 'DM Sans', sans-serif;
+}
+
+.demouser {
+    font-size: 16px
+}
+
+.loginButton {
+    width:230px;
+    height:40px;
+    margin:5px 5px 10px 5px;
+    font-size: large;
+    font-family: 'DM Sans', sans-serif;
 }

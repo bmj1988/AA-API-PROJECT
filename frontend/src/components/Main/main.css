@@ -1,0 +1,103 @@
+
+
+.mainDiv {
+    display: flex;
+    flex-wrap: wrap;
+    width: fit-content;
+    border-top: 1px solid lightslategray;
+    justify-content: center;
+    max-width: 1224px;
+    font-family: 'DM Sans', sans-serif;
+    padding: 20px
+}
+
+.singleSpotMain {
+    display:flex;
+    flex-direction: column;
+}
+
+.singleSpotBlurb {
+    display:block;
+    margin: 0 20px;
+    justify-content: flex-start;
+}
+
+.addressRatingFlex {
+    display: flex;
+    justify-content: space-between;
+}
+
+.starRating {
+    color: #1bcdd0;
+    font-size: 20px;
+}
+
+.imageClass {
+    width: 270px;
+    box-sizing: border-box;
+    margin:10px 10px 0 10px;
+    border-radius: 10%;
+    cursor: pointer;
+}
+
+.masterDiv {
+    display: flex;
+    justify-content: center;
+}
+
+.priceContainer {
+    cursor: pointer;
+}
+
+.spotPrice {
+    font-weight: bold;
+    padding-right: 2px
+}
+
+.priceContainer:hover {
+    text-decoration: underline #1bcdd0;
+    font-size: larger;
+    position: relative;
+}
+
+.spotButton {
+    background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	outline: inherit;
+}
+
+.tooltip {
+    position: relative;
+}
+
+.tooltip .tooltipText {
+    visibility: hidden;
+    position:absolute;
+    z-index: 1;
+    background-color: white;
+    bottom: 80%;
+    margin-left: -50%;
+    font-size: large;
+    font-family: 'DM Sans', sans-serif;
+    font-weight:bold;
+    transition-delay: 150ms
+
+}
+
+.tooltip:hover .tooltipText {
+    visibility: visible;
+}
+
+div.ownSpotsButton {
+    display: flex;
+    justify-content: space-evenly;
+    width: auto;
+    margin: auto;
+}
+
+div {
+    font-family: 'DM Sans', sans-serif;
+}

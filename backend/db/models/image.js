@@ -55,7 +55,11 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        isUrl: true
+        isUrl: true,
+        endsWithFile(value) {
+          if (!value.endsWith('.png'), !value.endsWith('.jpg'), !value.endsWith('.jpeg'))
+          throw new Error("Image URL must end in .png, .jpg, or .jpeg")
+        }
       }},
     preview: {
       type: DataTypes.BOOLEAN,

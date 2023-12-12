@@ -1,27 +1,29 @@
 import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import Icon from './ProfileButton'
+import UserIcon from './ProfileButton'
 import './Navigation.css'
-import OpenModalButton from '../OpenModalButton/OpenModalButton'
-import LoginFormModal from '../LoginFormModal/LoginFormModal'
-import SignupFormModal from '../SignupFormModal/SignupFormModal'
+import LogoButton from './LogoButton'
+import SearchBar from './SearchBar'
 
 const NavBar = ({ userFetched }) => {
     const sessionState = useSelector(state => state.session.user)
 
     return (
-        <nav>
-            <ul>
-                <li>
-                    <NavLink to='/'>Home</NavLink>
-                </li>
-                {userFetched && (
-                    <li>
-                        <Icon user={sessionState} />
-                    </li>
-                )
-                }
-            </ul>
+        <nav className='navBar'>
+
+            <div className={'navItem'}>
+                <NavLink to='/' style={{textDecoration: 'none', margin: '10px'}}><LogoButton/></NavLink>
+            </div>
+            <div>
+                <SearchBar/>
+            </div>
+            {userFetched && (
+                <div className={'navItem'}>
+                    <UserIcon className='userIcon' user={sessionState} />
+                </div>
+            )
+            }
+
         </nav>
     )
 }

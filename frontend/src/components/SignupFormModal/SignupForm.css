@@ -3,5 +3,37 @@
 }
 
 .loginputs {
-    margin: 15px;
+    margin: 10px 30px;
+    height:30px;
+    width: 350px;
+    font-size: 16px;
+}
+
+.signupForm {
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    padding-bottom: 20px;
+    background-color: white;
+    border-radius: 0 0 10% 10%;
+}
+
+.signupDiv {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #1bcdd0;
+    border-radius: 10%;
+}
+
+.signupHeader {
+    margin:10px
+}
+
+.signupButton {
+    margin-top: 10px;
+    width: 300px;
+    height: 40px;
+    font-size: large;
+    font-family: 'DM Sans', sans-serif;
 }

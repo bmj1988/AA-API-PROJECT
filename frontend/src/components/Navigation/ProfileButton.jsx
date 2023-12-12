@@ -1,10 +1,12 @@
 import { useDispatch } from "react-redux";
 import { thunkLogout } from "../../store/session";
 import { useState, useEffect, useRef } from "react";
-import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import SignupFormModal from "../SignupFormModal/SignupFormModal";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import OpenModalMenuItem from "./OpenModalMenuItem";
+import SpotFormModal from "../SpotFormModal/SpotForm";
+import { NavLink } from "react-router-dom";
+import './Navigation.css'
 
 const HomeIcon = ({ user }) => {
     const dispatch = useDispatch();
@@ -31,14 +33,15 @@ const HomeIcon = ({ user }) => {
             alert(logoutReceived.message);
         }
     }
+
     return (
-        <>
-            <button onClick={(e) => {
+        <div className='sessionContainer'>
+            <button className='modalMenuItem' onClick={(e) => {
                 e.stopPropagation();
                 setShowMenu(!showMenu)
             }}>
-                <div style={{ color: "blueviolet", fontSize: "40px" }}>
-                    <i className="fa-solid fa-house-user"></i>
+                <div style={{ color: "#1bcdd0", fontSize: "40px" }}>
+                    <i className="fa-solid fa-user-gear"></i>
                 </div>
             </button>
             <ul className={`profile-dropdown` + (showMenu ? '' : " hidden")} ref={menuRef}>
@@ -53,6 +56,9 @@ const HomeIcon = ({ user }) => {
                         <li>
                             {user.email}
                         </li>
+
+                        <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal/>}/>
+                        <NavLink to="/current">Manage Spots</NavLink>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
@@ -60,20 +66,16 @@ const HomeIcon = ({ user }) => {
                 )}
                 {
                     !user && (
-                        <>
-                            <li>
-                                <OpenModalMenuItem itemText={'Sign Up'} onItemClick={() => setShowMenu(false)} modalComponent={<SignupFormModal />} />
-                            </li>
-                            <li>
-                                <OpenModalMenuItem itemText={'Log In'} onItemClick={() => setShowMenu(false)} modalComponent={<LoginFormModal />} />
-                            </li>
-                        </>
+                        <div>
+                            <button className='modalMenuItem'><OpenModalMenuItem itemText={'Sign Up'} onItemClick={() => setShowMenu(false)} modalComponent={<SignupFormModal />} /></button>
+                            <button className='modalMenuItem'><OpenModalMenuItem itemText={'Log In'} onItemClick={() => setShowMenu(false)} modalComponent={<LoginFormModal />} /></button>
+                        </div>
                     )
                 }
 
 
             </ul>
-        </>
+        </div>
     )
 }
 
