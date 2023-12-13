@@ -3,7 +3,7 @@ import { thunkSpotById } from "../../store/spots";
 import { useDispatch } from "react-redux";
 
 const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
-    const {setModalContent, setOnModalClose} = useModal();
+    const { setModalContent, setOnModalClose } = useModal();
     const dispatch = useDispatch();
     const handleClick = async () => {
         await dispatch(thunkSpotById(spot.id))
@@ -19,12 +19,12 @@ const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
             </div>
             <div className='singleSpotBlurb'>
                 <div className='addressRatingFlex'>
-                    <p style={{cursor:'pointer'}}>{`${spot.city}, ${spot.state}`}</p>
-                    <div className={`starRating`}>
-                        <i className="fa-solid fa-star" />{spot.avgRating}
+                    <p style={{ cursor: 'pointer' }}>{`${spot.city}, ${spot.state}`}</p>
+                    <div style={{ display: 'inline' }} className={`starRating`}>
+                        <i className="fa-solid fa-star" />{spot.avgRating || 'New'}
                     </div>
                 </div>
-                <div style={{display: 'flex'}}><p className={'priceContainer'}><span className="spotPrice">{`$${spot.price} `}</span>{'per night'}</p></div>
+                <div style={{ display: 'flex' }}><p className={'priceContainer'}><span className="spotPrice">{`$${spot.price} `}</span>{'per night'}</p></div>
 
             </div>
         </div>

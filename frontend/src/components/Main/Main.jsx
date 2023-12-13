@@ -8,14 +8,14 @@ import SingleSpot from "./SingleSpot";
 import SpotModal from "./SpotModal/SpotModal";
 
 
-const Main = ({ props }) => {
+const Main = () => {
 
     const [spotsLoaded, setSpotsLoaded] = useState(false)
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(thunkAllSpots())
             .then(() => setSpotsLoaded(true))
-    }, [])
+    }, [dispatch])
 
     const spots = useSelector(spotsArray)
 

@@ -49,7 +49,7 @@ const SignupFormModal = () => {
                 <input name='username' type='text' placeholder='Username' className={`loginputs`} onChange={(e) => setUsername(e.target.value)} />
                 <input name='password' type='password' placeholder='Password' className={`loginputs`} onChange={(e) => setPassword(e.target.value)} />
                 <input name='passwordConfirm' type='password' placeholder='Confirm Password' className={`loginputs`} onChange={(e) => setConfirmPassword(e.target.value)} />
-                <button className='signupButton'>SIGN UP</button>
+                <button className='signupButton' disabled={password.length < 6 || confirmPassword.length < 6}>SIGN UP</button>
 
             </form>
         </div>

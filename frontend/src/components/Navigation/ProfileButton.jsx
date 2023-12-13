@@ -5,10 +5,12 @@ import SignupFormModal from "../SignupFormModal/SignupFormModal";
 import LoginFormModal from "../LoginFormModal/LoginFormModal";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import SpotFormModal from "../SpotFormModal/SpotForm";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './Navigation.css'
+import { thunkGetUserReviews } from "../../store/reviews";
 
 const HomeIcon = ({ user }) => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef();
@@ -32,6 +34,7 @@ const HomeIcon = ({ user }) => {
         if (logoutReceived.message) {
             alert(logoutReceived.message);
         }
+        navigate('/');
     }
 
     return (
@@ -48,17 +51,19 @@ const HomeIcon = ({ user }) => {
                 {user && (
                     <>
                         <li>
+                            {`Hello, ${user.firstName}!`}
+                        </li>
+                        <li>
                             {user.username}
                         </li>
-                        <li>
-                            {`${user.firstName} ${user.lastName}`}
-                        </li>
-                        <li>
+
+                        <li className='dropDownElement'>
                             {user.email}
                         </li>
 
-                        <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal/>}/>
-                        <NavLink to="/current">Manage Spots</NavLink>
+                        <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal />} />
+                        <NavLink to="/current" className={'unstyled'}>Manage Spots</NavLink>
+                        <NavLink to="/reviews" className={'unstyled'} onClick={dispatch(thunkGetUserReviews())}>Manage Reviews</NavLink>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>
@@ -66,10 +71,15 @@ const HomeIcon = ({ user }) => {
                 )}
                 {
                     !user && (
-                        <div>
-                            <button className='modalMenuItem'><OpenModalMenuItem itemText={'Sign Up'} onItemClick={() => setShowMenu(false)} modalComponent={<SignupFormModal />} /></button>
-                            <button className='modalMenuItem'><OpenModalMenuItem itemText={'Log In'} onItemClick={() => setShowMenu(false)} modalComponent={<LoginFormModal />} /></button>
-                        </div>
+                        <>
+                            <div style={{ display: 'block' }}>
+                                <button className='modalMenuItem'><OpenModalMenuItem itemText={'Sign Up'} onItemClick={() => setShowMenu(false)} modalComponent={<SignupFormModal />} /></button>
+                            </div>
+                            <div style={{ display: 'block' }}>
+                                <button className='modalMenuItem'><OpenModalMenuItem itemText={'Log In'} onItemClick={() => setShowMenu(false)} modalComponent={<LoginFormModal />} /></button>
+                            </div>
+                        </>
+
                     )
                 }
 

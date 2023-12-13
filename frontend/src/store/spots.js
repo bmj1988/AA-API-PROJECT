@@ -83,7 +83,7 @@ export const thunkCreateSpot = (spotDetails, images) => async (dispatch) => {
                 for (let image in images) {
                     fetchCreateImagesForSpot(image, newSpot.id)
                 }
-            };
+            }
             console.log('NEW SPOT!!!!!!!!!', newSpot)
             await dispatch(thunkSpotById(newSpot.id))
             return newSpot
@@ -125,7 +125,7 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
     catch (e) {
         const error = e.json();
         console.log(e)
-        return e
+        return error
     }
 }
 
@@ -185,7 +185,7 @@ export const spotsReducer = (state = {}, action) => {
 
 
 /// MISC HELPER FUNCTIONS
-const fetchCreateImagesForSpot = (image, spotId) => async (dispatch) => {
+const fetchCreateImagesForSpot = async (image, spotId) => {
     try {
         const response = await csrfFetch(`/api/spots/${spotId}/images`, {
             method: 'POST',

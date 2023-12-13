@@ -49,7 +49,7 @@ module.exports = {
   async down (queryInterface, Sequelize) {
     options.tableName = 'Reviews';
     const Op = Sequelize.Op;
-    return queryInterface.BulkDelete(options, {
+    return queryInterface.bulkDelete(options, {
       review: { [Op.in]: reviewSeeds.map((review) => (review.review))}
     })
   }

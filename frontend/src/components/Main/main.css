@@ -25,6 +25,7 @@
 .addressRatingFlex {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 
 .starRating {
@@ -101,3 +102,6 @@ div.ownSpotsButton {
 div {
     font-family: 'DM Sans', sans-serif;
 }
+
+/* .imageDisplay {
+} */

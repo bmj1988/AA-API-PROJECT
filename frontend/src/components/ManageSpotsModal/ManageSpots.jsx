@@ -11,7 +11,7 @@ import UpdateSpotModal from "./UpdateSpotModal";
 import './ManageSpots.css'
 import SpotFormModal from "../SpotFormModal/SpotForm";
 
-const ManageSpots = ({ props }) => {
+const ManageSpots = () => {
     const [ownSpotsLoaded, setOnSpotsLoaded] = useState(false)
     const dispatch = useDispatch();
     // const user = useSelector((state) => state.session.user)

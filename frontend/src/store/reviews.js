@@ -3,7 +3,7 @@ import { createSelector } from "reselect"
 
 /// ACTION TYPES
 const LOADREVIEWS = 'reviews/LOAD'
-const ADDREVIEW = 'reviews/ADD'
+const DELETEREVIEW = 'reviews/DEL'
 
 
 /// ACTION CREATORS
@@ -15,10 +15,10 @@ const loadReviews = (reviews) => {
     }
 }
 
-const addReview = (review) => {
+const deleteReview = (reviewId) => {
     return {
-        type: ADDREVIEW,
-        review
+        type: DELETEREVIEW,
+        reviewId
     }
 }
 
@@ -39,6 +39,47 @@ export const thunkReviewsBySpot = (spotId) => async (dispatch) => {
     }
 }
 
+export const thunkAddReview = (review) => async (dispatch) => {
+    const response = await csrfFetch(`/api/spots/${review.spotId}/reviews`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(review)
+
+    })
+    if (response.ok) {
+        const newReview = await response.json();
+        dispatch(thunkReviewsBySpot(review.spotId))
+        return newReview
+    }
+    else {
+        const error = await response.json()
+        return error
+    }
+}
+
+export const thunkDeleteReview = (reviewId) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+        method: 'DELETE'
+    })
+    if (response.ok) {
+        const success = await response.json()
+        dispatch(deleteReview(reviewId))
+        return success.message
+    }
+}
+
+export const thunkGetUserReviews = () => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/current`)
+    if (response.ok) {
+        const userReviews = await response.json();
+        console.log(`USER REVIEWS HERE`, userReviews)
+        await dispatch(loadReviews(userReviews))
+        return
+    }
+}
+
 /// REDUCER
 
 export const reviewReducer = (state = {}, action) => {
@@ -49,6 +90,10 @@ export const reviewReducer = (state = {}, action) => {
             action.reviews.forEach((review) => {
                 reviewState[review.id] = review;
             })
+            return reviewState;
+        }
+        case DELETEREVIEW: {
+            delete reviewState[action.reviewId]
             return reviewState;
         }
         default: {
