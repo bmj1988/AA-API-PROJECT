@@ -1,0 +1,47 @@
+.spotPageContainer {
+    max-width: 1000px;
+    overflow: auto;
+    margin: auto;
+}
+
+.imageDisplayPage {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-height: 400px;
+    max-width: 1000px;
+    background: none;
+}
+
+.spotPageImage {
+    flex: 1;
+    transition-delay: 200ms;
+    transition-duration: 50ms;
+    width: 200px;
+    box-sizing: border-box;
+    border-radius: 10%;
+    padding: 5px;
+}
+
+.spotPageImage:nth-of-type(1) {
+    width: 400px;
+    height: 400px;
+}
+
+.bigImage {
+    width: 800px;
+    height: auto;
+    position: relative;
+    left: -50%;
+    right: 0px;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    border: thick solid #1bcdd0;
+}
+
+.bigImageDiv {
+    position:absolute;
+    left: -80%;
+    bottom: -1210%;
+}

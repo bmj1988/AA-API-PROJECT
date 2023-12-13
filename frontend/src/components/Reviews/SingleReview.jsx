@@ -6,7 +6,6 @@ import { thunkDeleteReview } from '../../store/reviews';
 const SingleReview = ({ review, userReviews }) => {
     const dispatch = useDispatch();
     const [deletePrompt, setDeletePrompt] = useState(false)
-    console.log(`SINGLE REVIEW PROP`, review)
     const date = new Date(review.createdAt)
     const month = date.toLocaleString('default', {month: "long"})
     const toPublicDate = `${date.getDate()}, ${month}, ${date.getFullYear()}`
@@ -19,7 +18,6 @@ const SingleReview = ({ review, userReviews }) => {
         setDeletePrompt(false)
         alert(msg)
     }
-    console.log(`!! REVIEW.SPOT.NAME`, review)
     const displayText = userReviews && review ? review.Spot.name : review.User.firstName
     return (
         <div className='singleReview'>
@@ -31,7 +29,7 @@ const SingleReview = ({ review, userReviews }) => {
             <p className="starRating">{review.stars}</p>
             </div>
             </div>
-            {review.User.id === currentUser.id && <button onClick={(e) => setDeletePrompt(true)}>Delete</button>}
+            {review.User.id === currentUser.id && <button onClick={() => setDeletePrompt(true)}>Delete</button>}
             {deletePrompt && <div>
                 <h3 className='textmark'>Are you sure you want to delete this review?</h3>
                 <button className='deleteButton yes' autoFocus onClick={(e) => deleteReview(e)}>{'Yes, (Delete Review)'}</button>

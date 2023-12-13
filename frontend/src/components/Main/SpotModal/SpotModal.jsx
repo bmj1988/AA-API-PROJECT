@@ -1,14 +1,13 @@
-
 import { useSelector } from "react-redux";
-
 import './SpotModal.css'
 import PriceButton from "./PriceButton";
 import Reviews from "../../Reviews/Reviews";
+import {NavLink} from 'react-router-dom'
 
 const SpotModal = ({ spot }) => {
     const spotInfo = useSelector((state) => state.spots[spot.id])
     const owner = spotInfo.Owner
-    console.log(`SPOT INFO!!!!!!!!!!`, spotInfo)
+    const spotId = spot.id
 
     return (
         <div className={'spotModalContainer'}>
@@ -29,6 +28,7 @@ const SpotModal = ({ spot }) => {
                         <p>{spotInfo.description}</p>
                         <PriceButton spotInfo={{...spotInfo}} style={{alignSelf: 'center'}}/>
                     </div>
+                    <a href={`http://localhost:5173/spots/${spotId}`} target="_blank" style={{fontSize:'10px'}}> Open in separate tab</a>
                 </div>
 
             </div>

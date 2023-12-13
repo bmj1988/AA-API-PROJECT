@@ -1,0 +1,52 @@
+import { useDispatch, useSelector } from "react-redux";
+import './spotpage.css'
+import PriceButton from "../Main/SpotModal/PriceButton";
+import Reviews from "../Reviews/Reviews";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { thunkRestoreUser } from "../../store/session";
+import { thunkSpotById } from "../../store/spots";
+import OpenModalImage from "./OpenModalImage";
+import ImageDisplay from "./ImageDisplay";
+
+const SpotPage = () => {
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(thunkRestoreUser())
+        dispatch(thunkSpotById(Number(id)))
+    }, [dispatch])
+
+    const spotInfo = useSelector((state) => state.spots[id])
+
+
+    if (!spotInfo) return 'LOADING > > >'
+    const owner = spotInfo.Owner
+    return (
+        <div className={'spotPageContainer'}>
+            <div className={'topLine'}>
+                <h1>{spotInfo.name}</h1>
+                <h2>{`${spotInfo.city}, ${spotInfo.state}, ${spotInfo.country}`}</h2>
+            </div>
+            <div className={'imageDisplayPage'}>
+                <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage}/>}/>
+                {spotInfo.SpotImages.map((image) => {
+                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url}/>} />
+                })}
+            </div>
+            <div className="bioButtonContainer">
+                <div className="bio">
+                    <h2>{`Hosted by ${owner.firstName} ${owner.lastName}`}</h2>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', width: '800px' }}>
+                        <p>{spotInfo.description}</p>
+                        <PriceButton spotInfo={{ ...spotInfo }} style={{ alignSelf: 'center' }} />
+                    </div>
+                </div>
+
+            </div>
+            <Reviews spot={spotInfo} />
+        </div>
+    )
+}
+
+export default SpotPage;

@@ -39,7 +39,6 @@ export const thunkRestoreUser = () => async (dispatch) => {
         const response = await csrfFetch(`/api/session`)
         if (response.ok) {
             const userInfo = await response.json();
-            console.log(`!!!!!!!!!!!\n`, userInfo)
             await dispatch(setUser(userInfo));
             return userInfo
         }
@@ -102,7 +101,6 @@ const sessionReducer = (state = { user: null }, action) => {
     let sessionState = { ...state }
     switch (action.type) {
         case SETUSER: {
-            console.log(`!!!!!!!!!-----`, action.user)
             if (action.user.user === null) {
                 sessionState = {user: null}
                 return sessionState

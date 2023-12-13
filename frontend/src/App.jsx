@@ -6,6 +6,7 @@ import NavBar from './components/Navigation/Navigation'
 import Main from './components/Main/Main.jsx'
 import ManageSpots from './components/ManageSpotsModal/ManageSpots.jsx';
 import UserReviews from './components/UserReviews/UserReviews.jsx';
+import SpotPage from './components/SpotPage/SpotPage.jsx';
 
 
 const Layout = () => {
@@ -22,9 +23,9 @@ const Layout = () => {
 
   return (
     <>
-      <NavBar userFetched={userFetched}/>
+      <NavBar userFetched={userFetched} />
       <main>
-      {userFetched && <Outlet />}
+        {userFetched && <Outlet />}
       </main>
     </>
   )
@@ -37,14 +38,26 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Main/>
+        element: <Main />
       },
       {
         path: '/current',
-        element: <ManageSpots/>
+        element: <ManageSpots />
       },
-      {path: '/reviews',
-      element: <UserReviews/>}
+      {
+        path: '/reviews',
+        element: <UserReviews />
+      },
+      {
+        path: '/spots',
+        children: [
+          {
+            path: ':id',
+            element: <SpotPage/>
+          }
+        ]
+      }
+
     ]
   },
 ])

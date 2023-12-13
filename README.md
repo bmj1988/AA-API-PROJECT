@@ -4,7 +4,7 @@
 ![db-schema](<backend/AA API PROJECT (4).png>)
 
 ## Introduction
-  Mortar is a fullstack project designed to reproduce the functionality of popular rental platform AirBnB. This project provides functionality for Users to:
+  Mortar is a fullstack project designed to reproduce the functionality of popular online rental platform AirBnB. This project provides functionality for Users to:
 
   1) Create, Read, Update, and Delete rental properties hereafter referred to as 'Spots',
 
@@ -16,7 +16,7 @@
   The technologies implemented in the construction of Mortar are as follows:
 
   + Sequelize : The framework used in the construction of Mortar's database architecture.
-  + PostGresQL: the Relational Database Management System (RDBMS) used by render.com, where the project is deployed.
+  + PostGresQL: the Relational Database Management System (RDBMS) used in production.
   + Express : Used to create the backend router.
   + React : Used to create the frontend router, components, and layout.
   + mySQL : RDBMS used in development
@@ -28,7 +28,23 @@
  ![spot-view](</images/4e1cc6b9c6aa405f3f55f7f5eedb6718.gif>)
 
  ### Launch instructions
- 1) Clone the files from the Github page ()
+ 1) Clone the files from the Github page (https://github.com/bmj1988/Mortar.git)
+
+ 2) Navigate to the backend folder, then using the terminal enter "npm install"
+
+ 3) Create a .env file and assign values to
++ PORT=(express port)
++ DB_FILE=(db/dev.db)
++ NODE_ENV='development'
++ SCHEMA=aa_api_project
++ JWT_SECRET=(generate JWT secret)
++ JWT_EXPIRES_IN=(604800)
+
+ 4) seed the database using and enter "npm start" in the terminal
+
+ 3) In a separate terminal navigate to the frontend folder, in the terminal enter "npm install" and "npm run dev"
+
+ 4) Vite should auto-open a tab in your browser.
 
 
 ## API Documentation

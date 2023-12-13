@@ -12,14 +12,11 @@ const Reviews = ({ spot }) => {
     const [displayReviewForm, setDisplayReviewForm] = useState(false)
     const [PostButton, setPostButton] = useState(false)
 
-    console.log(`THIS IS THE SPOT INFO FOR THE REVIEWS SECTION`, spot)
-
     useEffect(() => {
         const loadreviews = async () => {
             return dispatch(thunkReviewsBySpot(spot.id))
         }
         loadreviews();
-        console.log('Reviews Loaded')
     }, [dispatch, spot.id])
     const reviewArray = useSelector(reviewsArray);
 
@@ -58,7 +55,7 @@ const Reviews = ({ spot }) => {
         }
         return
     }, [priorReview, user, spot.Owner.id, spot.numReview])
-    ;
+        ;
 
     /// HELPERS : import from separate file when code is working
     let reviewCase
