@@ -16,7 +16,7 @@ const SpotFormModal = () => {
     const [lat, setLat] = useState(50);
     const [lng, setLng] = useState(50);
     const [name, setName] = useState('');
-    const [price, setPrice] = useState(0);
+    const [price, setPrice] = useState(null);
     const [previewImage, setPreviewImage] = useState('');
     const [images, setImages] = useState({})
     const [errors, setErrors] = useState('');
@@ -102,9 +102,10 @@ const SpotFormModal = () => {
                     <input name='image' type='url' placeholder='Image URL' className={`spotInput`} onChange={(e) => setImages({ ...images, 1: e.target.value })} />
                     <input name='image' type='url' placeholder='Image URL' className={`spotInput`} onChange={(e) => setImages({ ...images, 2: e.target.value })} />
                     <input name='image' type='url' placeholder='Image URL' className={`spotInput`} onChange={(e) => setImages({ ...images, 3: e.target.value })} />
+                    <input name='image' type='url' placeholder='Image URL' className={`spotInput`} onChange={(e) => setImages({ ...images, 4: e.target.value })} />
                 </div>
                 <div className='location button'>
-                    <button className='spotSend'>Create New Spot</button>
+                    <button className='spotSend'>Create Spot</button>
                 </div>
 
             </form>

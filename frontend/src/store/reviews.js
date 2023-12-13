@@ -25,7 +25,10 @@ const deleteReview = (reviewId) => {
 /// SELECTORS
 
 export const reviewsArray = createSelector((state) => state.reviews, (reviews) => {
-    return Object.values(reviews)
+    return Object.values(reviews).sort((a, b) => {
+        if (a.id > b.id) return -1
+        if (a.id < b.id) return 1
+    })
 })
 
 /// THUNKS

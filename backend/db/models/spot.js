@@ -95,8 +95,10 @@ module.exports = (sequelize, DataTypes) => {
       },
     price: {
       type: DataTypes.DECIMAL,
+      allowNull: false,
       validate: {
-        min : 0.00
+        min : 0.01,
+        notNull: {msg: 'Price is required'}
       }
     },
     previewImage: {

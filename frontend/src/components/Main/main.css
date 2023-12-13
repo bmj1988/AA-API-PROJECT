@@ -103,5 +103,10 @@ div {
     font-family: 'DM Sans', sans-serif;
 }
 
+.spotModalContainer {
+    padding-top: 50px;
+    overflow: scroll;
+    max-width: 1000px;
+}
 /* .imageDisplay {
 } */

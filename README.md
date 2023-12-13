@@ -1,7 +1,36 @@
-# `AirBnB API PROJECT`
+# Mortar
 
 ## Database Schema Design
 ![db-schema](<backend/AA API PROJECT (4).png>)
+
+## Introduction
+  Mortar is a fullstack project designed to reproduce the functionality of popular rental platform AirBnB. This project provides functionality for Users to:
+
+  1) Create, Read, Update, and Delete rental properties hereafter referred to as 'Spots',
+
+  2) Create, Read, and Delete reviews of these Spots.
+
+  ![spot-view2](</images/d242bb9bdbec2f4aeb44403001539e52.gif>)
+
+  ### Technologies
+  The technologies implemented in the construction of Mortar are as follows:
+
+  + Sequelize : The framework used in the construction of Mortar's database architecture.
+  + PostGresQL: the Relational Database Management System (RDBMS) used by render.com, where the project is deployed.
+  + Express : Used to create the backend router.
+  + React : Used to create the frontend router, components, and layout.
+  + mySQL : RDBMS used in development
+  + vite : The development server environment used for the frontend.
+  + AWS S3: Serves all images used for the project.
+
+  The project also utilizes resources from Font Awesome and Google Fonts.
+
+ ![spot-view](</images/4e1cc6b9c6aa405f3f55f7f5eedb6718.gif>)
+
+ ### Launch instructions
+ 1) Clone the files from the Github page ()
+
+
 ## API Documentation
 
 ## USER AUTHENTICATION/AUTHORIZATION

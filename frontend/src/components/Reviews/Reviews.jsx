@@ -23,7 +23,7 @@ const Reviews = ({ spot }) => {
     }, [dispatch, spot.id])
     const reviewArray = useSelector(reviewsArray);
 
-    if (!user) user = {id: 0}
+    if (!user) user = { id: 0 }
     const priorReview = reviewArray.find((review) => review.User.id === user.id)
 
 
@@ -58,19 +58,22 @@ const Reviews = ({ spot }) => {
         }
         return
     }, [priorReview, user, spot.Owner.id, spot.numReview])
+    ;
 
     /// HELPERS : import from separate file when code is working
-
-
+    let reviewCase
+    if (spot.numReview) {
+        reviewCase = spot.numReview > 1 ? 'Reviews' : 'Review'
+    }
 
     return (
         <div className='reviewContainer'>
-            <div className={`starRating reviewRunner`}>
+            <div className={`starRating reviewRunnerInPage`}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <i className="fa-solid fa-star" />
                     <p style={{ marginLeft: '5px' }}>{(spot.avgRating ? spot.avgRating : 'New')}</p>
                 </div>
-                <p>{(spot.numReview > 0 ? `Based on ${spot.numReview} Reviews` : '')}</p>
+                <p>{(spot.numReview > 0 ? `Based on ${spot.numReview} ${reviewCase}` : '')}</p>
             </div>
             {PostButton && <button onClick={(e) => {
                 e.stopPropagation();
@@ -79,7 +82,7 @@ const Reviews = ({ spot }) => {
             }}>{displayText}</button>
 
             }
-            <div>{(displayReviewForm === true && user.id > 0) && <ReviewForm spotId={spot.id} userId={user.id}/>}</div>
+            <div>{(displayReviewForm === true && user.id > 0) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
             <div>
                 {reviewArray.map((review) => {
                     return <SingleReview key={review.id} review={review} />

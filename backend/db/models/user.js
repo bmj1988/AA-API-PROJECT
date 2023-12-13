@@ -23,7 +23,7 @@ module.exports = (sequelize, DataTypes) => {
       allowNull: false,
       unique: true,
       validate: {
-        len: [4, 30],
+        len: {args: [4, 30], msg: 'Username must be between 4 and 30 characters'},
         isNotEmail(value) {
           if (Validator.isEmail(value) === true) {
             throw new Error('Cannot have email for username!')
@@ -33,10 +33,10 @@ module.exports = (sequelize, DataTypes) => {
     },
     email: {
       type: DataTypes.STRING,
-      unique: true,
+      unique: {args: true, msg: 'This email address belongs to another account'},
       validate: {
-        len: [3, 256],
-        isEmail: true
+        len: {args: [3, 256], msg: 'Email length must be between 3 and 256 characters'},
+        isEmail: {args: true, msg: 'Must provide a valid email!'}
       }
     },
     hashedPassword: {
@@ -48,16 +48,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     firstName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: {args: false, msg: 'First name must not be null'},
       validate: {
-        isAlpha: true,
+        isAlpha: {args: true, msg: 'Must provide a real first name'},
       }
     },
     lastName: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: {args: false, msg: 'Last name must not be null'},
       validate: {
-        isAlpha: true,
+        isAlpha: {args: true, msg: 'Must provide a real last name'},
       }
     }
   }, {

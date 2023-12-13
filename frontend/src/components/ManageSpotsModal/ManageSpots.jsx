@@ -24,7 +24,14 @@ const ManageSpots = () => {
     })
 
 
-    if (!spots) return `LOADING > > >`
+    if (!spots) return (
+        <div className='masterDiv'>
+            <div style={{display: 'block'}}>
+            <h1>Manage your spots</h1>
+            <OpenModalButton modalComponent={<SpotFormModal/>} buttonText={'Create new Spot'}/>
+            </div>
+        </div>
+    )
 
     return (
         <div className='masterDiv'>
