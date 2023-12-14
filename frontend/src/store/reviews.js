@@ -9,7 +9,7 @@ const DELETEREVIEW = 'reviews/DEL'
 /// ACTION CREATORS
 
 const loadReviews = (reviews) => {
-   return  {
+    return {
         type: LOADREVIEWS,
         reviews
     }
@@ -40,6 +40,7 @@ export const thunkReviewsBySpot = (spotId) => async (dispatch) => {
         await dispatch(loadReviews(reviews))
         return reviews
     }
+
 }
 
 export const thunkAddReview = (review) => async (dispatch) => {
@@ -89,11 +90,11 @@ export const thunkGetUserReviews = () => async (dispatch) => {
 /// REDUCER
 
 export const reviewReducer = (state = {}, action) => {
-    let reviewState = {...state}
+    let reviewState = { ...state }
     switch (action.type) {
         case LOADREVIEWS: {
             reviewState = {}
-            action.reviews.forEach((review) => {
+            action.reviews.Reviews.forEach((review) => {
                 reviewState[review.id] = review;
             })
             return reviewState;
