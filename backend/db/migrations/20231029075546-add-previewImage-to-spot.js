@@ -7,7 +7,7 @@ options.tableName = 'Spots';
 
 module.exports = {
   async up (queryInterface, Sequelize) {
-    await queryInterface.addColumn(options, 'previewImage', {
+    await queryInterface.addColumn("Spots", 'previewImage', {
       type: Sequelize.STRING,
       defaultValue: null,
     })
