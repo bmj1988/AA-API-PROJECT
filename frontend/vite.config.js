@@ -17,8 +17,5 @@ export default defineConfig(({ mode }) => ({
       '/api/': 'http://localhost:8888'
     }
   },
-  build: {
-    target: 'esnext'
-  }
 
 }));
