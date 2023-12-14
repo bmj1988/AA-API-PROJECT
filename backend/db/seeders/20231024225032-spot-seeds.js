@@ -123,8 +123,9 @@ module.exports = {
   },
   async down(queryInterface, Sequelize) {
     options.tableName = 'Spots'
+    const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
-      name: spotSeed.map(seed => seed.name)
+      name: { [Op.in]: spotSeed.map(seed => seed.name)}
     },
      {});
   }
