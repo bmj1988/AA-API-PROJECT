@@ -20,7 +20,6 @@ const ReviewFormModal = ({ spotId, userId }) => {
             review,
             stars: rating,
         }
-        console.log(newReview)
         const responseReview = await dispatch(thunkAddReview(newReview))
         if (!responseReview.errors) {
             closeModal();

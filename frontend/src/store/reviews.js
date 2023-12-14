@@ -81,7 +81,6 @@ export const thunkGetUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
     if (response.ok) {
         const userReviews = await response.json();
-        console.log(`USER REVIEWS HERE`, userReviews)
         await dispatch(loadReviews(userReviews))
         return
     }

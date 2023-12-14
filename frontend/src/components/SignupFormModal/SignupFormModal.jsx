@@ -30,7 +30,6 @@ const SignupFormModal = () => {
             }
             const res = await dispatch(thunkCreateUser(newUser))
             if (res.errors) {
-                console.log(res)
                 setErrors(res.errors)
                 return
             }

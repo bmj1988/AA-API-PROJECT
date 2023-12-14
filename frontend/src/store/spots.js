@@ -46,7 +46,6 @@ export const thunkAllSpots = () => async (dispatch) => {
         }
     }
     catch (e) {
-        console.log(`!!!!!!!!!!!! \n`, e)
         return e
     }
 
@@ -62,7 +61,6 @@ export const thunkSpotById = (id) => async (dispatch) => {
         }
     }
     catch (e) {
-        console.log(`!!!!!!!!!!!! \n`, e)
         return e
     }
 
@@ -84,14 +82,12 @@ export const thunkCreateSpot = (spotDetails, images) => async (dispatch) => {
                     fetchCreateImagesForSpot(image, newSpot.id)
                 }
             }
-            console.log('NEW SPOT!!!!!!!!!', newSpot)
             await dispatch(thunkSpotById(newSpot.id))
             return newSpot
         }
     }
     catch (e) {
         const error = await e.json();
-        console.log(`!!!!!!!!! ERROR LOOK HERE RN`, error)
         return error
     }
 }
@@ -106,7 +102,6 @@ export const thunkGetOwnSpots = () => async (dispatch) => {
         }
     }
     catch (e) {
-        console.log(e)
         return e
     }
 }
@@ -124,7 +119,6 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
     }
     catch (e) {
         const error = e.json();
-        console.log(e)
         return error
     }
 }
@@ -162,7 +156,6 @@ export const spotsReducer = (state = {}, action) => {
     let spotState = { ...state }
     switch (action.type) {
         case GETALLSPOTS: {
-            console.log(action.spots.Spots)
             spotState = {};
             action.spots.Spots.forEach((spot) => spotState[spot.id] = spot)
             return spotState;

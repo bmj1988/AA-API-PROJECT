@@ -40,11 +40,9 @@ const UpdateSpotModal = ({spot}) => {
         }
         const res = await dispatch(thunkSpotUpdate(newSpot, spot.id))
         if (res.errors) {
-            console.log(`RES ERRORS`, res)
             setErrors(res.errors)
             return
         }
-        console.log(`THIS IS THE RESPONSE ON UPDATE SPOT MODAL `, res)
         setModalContent(<SpotModal spot={res}/>);
 
     }

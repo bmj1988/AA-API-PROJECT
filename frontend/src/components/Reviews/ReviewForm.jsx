@@ -19,7 +19,6 @@ const ReviewForm = ({ spotId, userId }) => {
             review,
             stars: rating,
         }
-        console.log(newReview)
         const responseReview = await dispatch(thunkAddReview(newReview))
         if (!responseReview.errors) {
             setSubmitted(true)

@@ -7,8 +7,7 @@ const DeletePrompt = ({reviewId}) => {
     const {closeModal} = useModal();
     const deleteReview = async (e) => {
         e.preventDefault();
-        const msg = await dispatch(thunkDeleteReview(reviewId))
-        console.log(msg)
+        await dispatch(thunkDeleteReview(reviewId))
         closeModal();
     }
 

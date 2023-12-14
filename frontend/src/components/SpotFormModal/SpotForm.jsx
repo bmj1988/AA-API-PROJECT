@@ -40,12 +40,10 @@ const SpotFormModal = () => {
         }
         const res = await dispatch(thunkCreateSpot(newSpot, images))
         if (res.errors) {
-            console.log(`RES ERRORS`, res)
             setErrors(res.errors)
-            console.log(`PRICE!!!!!!!!!!!!!!!`, price > 0)
             return
         }
-        console.log(res)
+
         setModalContent(<SpotModal spot={res}/>);
 
     }
