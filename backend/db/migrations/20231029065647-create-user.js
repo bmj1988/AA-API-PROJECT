@@ -23,7 +23,7 @@ module.exports = {
         unique: true
       },
       hashedPassword: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING.BINARY
       },
       firstName: {
         type: Sequelize.STRING,
