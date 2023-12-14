@@ -39,8 +39,6 @@ const reviewSeeds = [
   },
 ]
 
-
-/** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up (queryInterface, Sequelize) {
     await Review.bulkCreate(reviewSeeds, {validate: true})
