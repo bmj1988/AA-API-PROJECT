@@ -24,7 +24,7 @@ module.exports = (sequelize, DataTypes) => {
       unique: true,
       validate: {
         len: {args: [4, 30], msg: 'Username must be between 4 and 30 characters'},
-        isEmail: {args: false, msg: 'Cannot have email for username!'}
+        isEmail: {args: true, msg: 'Cannot have email for username!'}
       }
     },
     email: {
