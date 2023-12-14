@@ -14,7 +14,11 @@ export default defineConfig(({ mode }) => ({
   server: {
     open: true,
     proxy: {
-    '/api/': 'http://localhost:8888'
+      '/api/': 'http://localhost:8888'
     }
+  },
+  build: {
+    target: 'esnext'
   }
+
 }));

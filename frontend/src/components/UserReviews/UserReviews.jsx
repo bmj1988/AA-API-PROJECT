@@ -1,16 +1,16 @@
-// import { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux"
-// import { thunkGetUserReviews } from "../../store/reviews";
+import { thunkGetUserReviews } from "../../store/reviews";
 import { reviewsArray } from "../../store/reviews";
 import SingleReview from "../Reviews/SingleReview";
 
 const UserReviews = () => {
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
 
-    // useEffect(() => {
-    //     dispatch(thunkGetUserReviews())
+    useEffect(() => {
+        dispatch(thunkGetUserReviews())
 
-    // }, [dispatch]);
+    }, [dispatch]);
 
     const userReviews = useSelector(reviewsArray);
 

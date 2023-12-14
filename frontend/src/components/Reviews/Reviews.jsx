@@ -4,9 +4,11 @@ import { useDispatch, useSelector } from "react-redux"
 import SingleReview from "./SingleReview"
 import './Reviews.css'
 import ReviewForm from "./ReviewForm"
+import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import ReviewFormModal from "./ReviewFormModal"
 
 let displayText
-const Reviews = ({ spot }) => {
+const Reviews = ({ spot, page }) => {
     const dispatch = useDispatch();
     let user = useSelector((state) => state.session.user)
     const [displayReviewForm, setDisplayReviewForm] = useState(false)
@@ -72,17 +74,17 @@ const Reviews = ({ spot }) => {
                 </div>
                 <p>{(spot.numReview > 0 ? `Based on ${spot.numReview} ${reviewCase}` : '')}</p>
             </div>
-            {PostButton && <button onClick={(e) => {
+            {(PostButton && !page) && <button onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 setDisplayReviewForm(!displayReviewForm)
-            }}>{displayText}</button>
+            }}>{displayText}</button>}
+            {(PostButton && page) && <OpenModalButton buttonText={displayText} modalComponent={<ReviewFormModal spotId={spot.id} userId={user.id}/>}/>}
 
-            }
-            <div>{(displayReviewForm === true && user.id > 0) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
+            <div>{(displayReviewForm === true && user.id > 0 && !page) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
             <div>
                 {reviewArray.map((review) => {
-                    return <SingleReview key={review.id} review={review} />
+                    return <SingleReview key={review.id} review={review} page={page}/>
                 })}
 
             </div>

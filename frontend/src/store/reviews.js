@@ -71,6 +71,10 @@ export const thunkDeleteReview = (reviewId) => async (dispatch) => {
         dispatch(deleteReview(reviewId))
         return success.message
     }
+    else {
+        const error = await response.json();
+        return error
+    }
 }
 
 export const thunkGetUserReviews = () => async (dispatch) => {

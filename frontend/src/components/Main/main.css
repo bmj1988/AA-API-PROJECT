@@ -48,11 +48,12 @@
 
 .priceContainer {
     cursor: pointer;
+
 }
 
 .spotPrice {
     font-weight: bold;
-    padding-right: 2px
+    padding-right: 2px;
 }
 
 .priceContainer:hover {

@@ -23,7 +23,8 @@ const SpotFormModal = () => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        setLng(50);
+        setLat(50);
         const newSpot = {
             address,
             description,

@@ -2,8 +2,10 @@ import { useDispatch, useSelector } from 'react-redux'
 import './Reviews.css'
 import { useState } from 'react'
 import { thunkDeleteReview } from '../../store/reviews';
+import OpenModalButton from '../OpenModalButton/OpenModalButton';
+import DeletePrompt from './DeletePrompt';
 
-const SingleReview = ({ review, userReviews }) => {
+const SingleReview = ({ review, userReviews, page }) => {
     const dispatch = useDispatch();
     const [deletePrompt, setDeletePrompt] = useState(false)
     const date = new Date(review.createdAt)
@@ -29,7 +31,8 @@ const SingleReview = ({ review, userReviews }) => {
             <p className="starRating">{review.stars}</p>
             </div>
             </div>
-            {review.User.id === currentUser.id && <button onClick={() => setDeletePrompt(true)}>Delete</button>}
+            {(review.User.id === currentUser.id && !page) && <button onClick={() => setDeletePrompt(true)}>Delete</button>}
+            {(review.User.id === currentUser.id && page) && <OpenModalButton modalComponent={<DeletePrompt reviewId={review.id}/>} buttonText={'Delete'}/>}
             {deletePrompt && <div>
                 <h3 className='textmark'>Are you sure you want to delete this review?</h3>
                 <button className='deleteButton yes' autoFocus onClick={(e) => deleteReview(e)}>{'Yes, (Delete Review)'}</button>

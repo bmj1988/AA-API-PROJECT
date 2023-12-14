@@ -1,5 +1,3 @@
-import { useModal } from "../../context/Modal";
-
 const ImageDisplay = ({url}) => {
     console.log(url)
     return (

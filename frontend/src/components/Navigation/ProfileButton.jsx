@@ -7,7 +7,6 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import SpotFormModal from "../SpotFormModal/SpotForm";
 import { NavLink, useNavigate } from "react-router-dom";
 import './Navigation.css'
-import { thunkGetUserReviews } from "../../store/reviews";
 
 const HomeIcon = ({ user }) => {
     const navigate = useNavigate();
@@ -63,7 +62,7 @@ const HomeIcon = ({ user }) => {
 
                         <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal />} />
                         <NavLink to="/current" className={'unstyled'}>Manage Spots</NavLink>
-                        <NavLink to="/reviews" className={'unstyled'} onClick={dispatch(thunkGetUserReviews())}>Manage Reviews</NavLink>
+                        <NavLink to="/reviews" className={'unstyled'}>Manage Reviews</NavLink>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>

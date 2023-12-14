@@ -4,7 +4,6 @@ import PriceButton from "../Main/SpotModal/PriceButton";
 import Reviews from "../Reviews/Reviews";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import { thunkRestoreUser } from "../../store/session";
 import { thunkSpotById } from "../../store/spots";
 import OpenModalImage from "./OpenModalImage";
 import ImageDisplay from "./ImageDisplay";
@@ -13,9 +12,8 @@ const SpotPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(thunkRestoreUser())
         dispatch(thunkSpotById(Number(id)))
-    }, [dispatch])
+    }, [dispatch, id])
 
     const spotInfo = useSelector((state) => state.spots[id])
 
@@ -44,7 +42,7 @@ const SpotPage = () => {
                 </div>
 
             </div>
-            <Reviews spot={spotInfo} />
+            <Reviews spot={spotInfo} page={true}/>
         </div>
     )
 }

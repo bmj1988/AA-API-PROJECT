@@ -23,7 +23,8 @@ const UpdateSpotModal = ({spot}) => {
 
     const onSubmit = async (e) => {
         e.preventDefault();
-
+        setLng(spot.lng);
+        setLat(spot.lat);
         const newSpot = {
             address,
             description,
@@ -53,7 +54,7 @@ const UpdateSpotModal = ({spot}) => {
             <h1 className='spotFormHeader'>Create a New Spot</h1>
             <form onSubmit={onSubmit} className="spotForm">
                 <div className='sectionContainer'>
-                    <h2>Where's your place located?</h2>
+                    <h2>{`Where&apos;s your place located?`}</h2>
                     <p>Guests will only get your exact address once they booked a
                         reservation</p>
 
@@ -80,8 +81,8 @@ const UpdateSpotModal = ({spot}) => {
                 </div>
                 <div className='sectionContainer'>
                     <h2>Create a title for your spot</h2>
-                    <p>Catch guests' attention with a spot title that highlights what makes
-                        your place special.</p>
+                    <p>{`Catch guest&apos; attention with a spot title that highlights what makes
+                        your place special.`}</p>
                     {errors.name && <p className='errors'>{errors.name}</p>}
                     <input name='name' type='text' value={name} className={`spotInput`} onChange={(e) => setName(e.target.value)} />
                 </div>
