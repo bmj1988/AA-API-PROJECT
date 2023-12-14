@@ -3,7 +3,7 @@ let options = {};
 if (process.env.NODE_ENV === 'production') {
   options.schema = process.env.SCHEMA;
 }
-options.tableName = "Spots";
+options.tableName = 'Spots';
 
 module.exports = {
   async up (queryInterface, Sequelize) {
