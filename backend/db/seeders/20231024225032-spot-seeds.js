@@ -126,7 +126,6 @@ module.exports = {
     const Op = Sequelize.Op;
     await queryInterface.bulkDelete(options, {
       name: { [Op.in]: spotSeed.map(seed => seed.name)}
-    },
-     {});
+    }, {});
   }
 };
