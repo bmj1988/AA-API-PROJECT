@@ -14,7 +14,6 @@ router.use(restoreUser)
 /// GET ALL SPOTS
 
 router.get('/', queryParser, async (req, res) => {
-    console.log(req.minLat)
     const spotsArray = []
     const query = {}
     const returbObj = {};

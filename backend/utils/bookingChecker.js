@@ -13,11 +13,9 @@ const allSpotBookings = await spot.getBookings()
 for (let booking of allSpotBookings) {
     if (startDate > booking.startDate && startDate < booking.endDate || startDate === booking.startDate || startDate === booking.endDate) {
         Object.assign(errors, {startDate: 'Start date conflicts with an existing booking'})
-        console.log(`THIS IS THE CONFLICTING BOOKING: ${booking.startDate} ending ${booking.endDate} here ${startDate}`)
     }
     if (endDate > booking.startDate && endDate < booking.endDate || endDate === booking.startDate || endDate === booking.endDate) {
         Object.assign(errors, {endDate: "End date conflicts with an existing booking"})
-        console.log(`THIS IS THE CONFLICTING BOOKING: ${booking.startDate} ending ${booking.endDate} here ${endDate}`)
     }
     if (startDate < booking.startDate && endDate > booking.endDate) {
         Object.assign(errors, {overlappingBooking: "Your dates contain a set of dates which conflict with an existing booking"})
@@ -42,11 +40,9 @@ const checkBookingConflictsBOOKING = async function (req, res, next) {
         if (booking.id === bookingId) continue;
         if (startDate > booking.startDate && startDate < booking.endDate || startDate === booking.startDate || startDate === booking.endDate) {
             Object.assign(errors, {startDate: 'Start date conflicts with an existing booking'})
-            console.log(`THIS IS THE CONFLICTING BOOKING: ${booking.startDate} ending ${booking.endDate} here ${startDate}`)
         }
         if (endDate > booking.startDate && endDate < booking.endDate || endDate === booking.startDate || endDate === booking.endDate) {
             Object.assign(errors, {endDate: "End date conflicts with an existing booking"})
-            console.log(`THIS IS THE CONFLICTING BOOKING: ${booking.startDate} ending ${booking.endDate} here ${endDate}`)
         }
         if (startDate < booking.startDate && endDate > booking.endDate) {
             Object.assign(errors, {overlappingBooking: "Your dates contain a set of dates which conflict with an existing booking"})

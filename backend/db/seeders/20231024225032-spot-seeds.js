@@ -118,7 +118,6 @@ module.exports = {
     try {
       await Spot.bulkCreate(spotSeed, { validate: true })
     } catch (err) {
-      console.log(err)
       throw err
     }
   },
