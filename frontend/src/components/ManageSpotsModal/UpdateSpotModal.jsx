@@ -49,7 +49,7 @@ const UpdateSpotModal = ({spot}) => {
 
     return (
         <div className='spotFormDiv'>
-            <h1 className='spotFormHeader'>Create a New Spot</h1>
+            <h1 className='spotFormHeader'>Update your spot</h1>
             <form onSubmit={onSubmit} className="spotForm">
                 <div className='sectionContainer'>
                     <h2>{`Where&apos;s your place located?`}</h2>

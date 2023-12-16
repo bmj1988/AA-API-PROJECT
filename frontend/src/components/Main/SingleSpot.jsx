@@ -1,15 +1,19 @@
 import { useModal } from "../../context/Modal"
 import { thunkSpotById } from "../../store/spots";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
-    const { setModalContent, setOnModalClose } = useModal();
+    const { setModalContent, setOnModalClose, modalView } = useModal();
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClick = async () => {
+        if (modalView) navigate(`/spots/${spot.id}`)
+        else {
         await dispatch(thunkSpotById(spot.id))
         if (typeof onSpotClick === 'function') onSpotClick();
         if (onModalClose) setOnModalClose(onModalClose);
-        setModalContent(modalComponent);
+        setModalContent(modalComponent);}
     }
 
     return (

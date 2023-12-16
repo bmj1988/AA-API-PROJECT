@@ -29,10 +29,7 @@ const HomeIcon = ({ user }) => {
     const logout = async (e) => {
         e.preventDefault();
         setShowMenu(false);
-        const logoutReceived = await dispatch(thunkLogout());
-        if (logoutReceived.message) {
-            alert(logoutReceived.message);
-        }
+        await dispatch(thunkLogout());
         navigate('/');
     }
 

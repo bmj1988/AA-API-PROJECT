@@ -1,13 +1,14 @@
 import './SpotModal.css';
 
-const PriceButton = ({spotInfo}) => {
+const PriceButton = ({spot}) => {
+    const spotInfo = useSelector((state) => state.spots[spot.id])
     const reserve = (e) => {
         e.preventDefault();
         alert('Feature coming soon!')
         return;
     }
-    let reviewCase
-    if (spotInfo.numReview) {
+    let reviewCase;
+    if (spotInfo.numReview > 0) {
         reviewCase = spotInfo.numReview > 1 ? `· ${spotInfo.numReview} Reviews` : `· ${spotInfo.numReview} Review`
     }
     return (

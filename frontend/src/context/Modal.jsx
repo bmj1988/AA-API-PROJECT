@@ -8,6 +8,7 @@ export function ModalProvider({ children }) {
     const modalRef = useRef();
     const [modalContent, setModalContent] = useState(null);
     const [onModalClose, setOnModalClose] = useState(null);
+    const [modalView, setModalView] = useState(false);
 
     const closeModal = () => {
         setModalContent(null);

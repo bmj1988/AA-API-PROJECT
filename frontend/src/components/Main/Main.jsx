@@ -6,11 +6,13 @@ import { spotsArray } from "../../store/spots";
 import './main.css'
 import SingleSpot from "./SingleSpot";
 import SpotModal from "./SpotModal/SpotModal";
+import { useModal } from "../../context/Modal";
 
 
 const Main = () => {
 
     const [spotsLoaded, setSpotsLoaded] = useState(false)
+    const { modalView } = useModal();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(thunkAllSpots())
@@ -21,6 +23,7 @@ const Main = () => {
 
     if (!spotsLoaded) return `LOADING > > >`
 
+
     return (
         <div className='masterDiv'>
             <div className='mainDiv'>
@@ -28,11 +31,11 @@ const Main = () => {
                     return (
                         <div className='tooltip' key={spot.id}>
                             <button className={'spotButton'}>
-                                <SingleSpot className={'singleSpot'} spot={spot} modalComponent={<SpotModal spot={spot}/>} />
+                                <SingleSpot className={'singleSpot'} spot={spot} modalComponent={<SpotModal spot={spot} />} />
                                 <span className='tooltipText'>{spot.name}</span>
                             </button>
                         </div>
-                        )
+                    )
                 })}
             </div>
         </div>
