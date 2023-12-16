@@ -1,5 +1,6 @@
 import { csrfFetch } from "./crsf"
 import { createSelector } from "reselect"
+import { thunkSpotById } from "./spots"
 
 /// ACTION TYPES
 const LOADREVIEWS = 'reviews/LOAD'
@@ -55,6 +56,7 @@ export const thunkAddReview = (review) => async (dispatch) => {
     if (response.ok) {
         const newReview = await response.json();
         dispatch(thunkReviewsBySpot(review.spotId))
+        dispatch(thunkSpotById(review.spotId))
         return newReview
     }
     else {

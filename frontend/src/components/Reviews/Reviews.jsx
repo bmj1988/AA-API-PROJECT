@@ -11,6 +11,7 @@ let displayText
 const Reviews = ({ spot, page }) => {
     const dispatch = useDispatch();
     let user = useSelector((state) => state.session.user)
+    const spotDetails = useSelector((state) => state.spots[spot.id])
     const [displayReviewForm, setDisplayReviewForm] = useState(false)
     const [PostButton, setPostButton] = useState(false)
 
@@ -24,8 +25,6 @@ const Reviews = ({ spot, page }) => {
 
     if (!user) user = { id: 0 }
     const priorReview = reviewArray.find((review) => review.User.id === user.id)
-
-
 
 
     useEffect(() => {
@@ -70,21 +69,29 @@ const Reviews = ({ spot, page }) => {
             <div className={`starRating reviewRunnerInPage`}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
                     <i className="fa-solid fa-star" />
-                    <p style={{ marginLeft: '5px' }}>{(spot.avgRating ? spot.avgRating : 'New')}</p>
+                    <p style={{ marginLeft: '5px' }}>{(spotDetails.avgRating ? spotDetails.avgRating : 'New')}</p>
                 </div>
-                <p>{(spot.numReview > 0 ? `Based on ${spot.numReview} ${reviewCase}` : '')}</p>
+                <p>{(spot.numReview > 0 ? `Based on ${spotDetails.numReview} ${reviewCase}` : '')}</p>
             </div>
-            {(PostButton && !page) && <button onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                setDisplayReviewForm(!displayReviewForm)
-            }}>{displayText}</button>}
-            {(PostButton && page) && <OpenModalButton buttonText={displayText} modalComponent={<ReviewFormModal spotId={spot.id} userId={user.id}/>}/>}
+            {PostButton && <div>
+                {
+                    !page && <button onClick={(e) => {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        setDisplayReviewForm(!displayReviewForm)
+                    }}>{displayText}
+                    </button>
+                }
 
+                {
+                    page && <OpenModalButton buttonText={displayText} modalComponent={<ReviewFormModal spotId={spot.id} userId={user.id} />} />
+
+                }
+            </div>}
             <div>{(displayReviewForm === true && user.id > 0 && !page) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
             <div>
                 {reviewArray.map((review) => {
-                    return <SingleReview key={review.id} review={review} page={page}/>
+                    return <SingleReview key={review.id} review={review} page={page} />
                 })}
 
             </div>
