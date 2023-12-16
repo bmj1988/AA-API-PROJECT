@@ -2,12 +2,12 @@ import { useDispatch } from "react-redux"
 import { useModal } from "../../context/Modal";
 import { thunkDeleteReview } from "../../store/reviews";
 
-const DeletePrompt = ({reviewId}) => {
+const DeletePrompt = ({review}) => {
     const dispatch = useDispatch();
     const {closeModal} = useModal();
     const deleteReview = async (e) => {
         e.preventDefault();
-        await dispatch(thunkDeleteReview(reviewId))
+        await dispatch(thunkDeleteReview(review))
         closeModal();
     }
 

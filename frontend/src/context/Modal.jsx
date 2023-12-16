@@ -26,6 +26,8 @@ export function ModalProvider({ children }) {
         setModalContent,
         setOnModalClose,
         closeModal,
+        modalView,
+        setModalView
     };
 
     return (

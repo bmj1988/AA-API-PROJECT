@@ -6,13 +6,11 @@ import { spotsArray } from "../../store/spots";
 import './main.css'
 import SingleSpot from "./SingleSpot";
 import SpotModal from "./SpotModal/SpotModal";
-import { useModal } from "../../context/Modal";
 
 
 const Main = () => {
 
     const [spotsLoaded, setSpotsLoaded] = useState(false)
-    const { modalView } = useModal();
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(thunkAllSpots())

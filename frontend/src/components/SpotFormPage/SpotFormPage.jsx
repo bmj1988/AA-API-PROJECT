@@ -1,10 +1,12 @@
 import { useState } from 'react'
-import './SpotForm.css'
+import '../SpotFormModal/SpotForm.css'
 import { useDispatch } from 'react-redux'
 import { thunkCreateSpot } from '../../store/spots'
+import { useNavigate } from 'react-router-dom'
 
 
-const SpotFormModal = () => {
+const SpotFormPage = () => {
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [address, setAddress] = useState('');
     const [description, setDescription] = useState('');
@@ -41,11 +43,12 @@ const SpotFormModal = () => {
             setErrors(res.errors)
             return
         }
+        navigate(`../spots/${res.id}`)
         return
     }
 
     return (
-        <div className='spotFormDiv'>
+        <div className='spotFormDiv spotFormPageDiv'>
             <h1 className='spotFormHeader'>Create a New Spot</h1>
             <form onSubmit={onSubmit} className="spotForm">
                 <div className='sectionContainer'>
@@ -109,6 +112,4 @@ const SpotFormModal = () => {
         </div>
     )
 }
-export default SpotFormModal
-
-{/* {Object.values(errors).length > 0 && Object.values(errors).map(error => <p className={'errors'} key={error}>{error}</p>)} */ }
+export default SpotFormPage

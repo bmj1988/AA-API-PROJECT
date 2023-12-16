@@ -5,10 +5,13 @@ import SingleReview from "./SingleReview"
 import './Reviews.css'
 import ReviewForm from "./ReviewForm"
 import OpenModalButton from "../OpenModalButton/OpenModalButton"
+import ReviewFormModal from './ReviewFormModal'
+import { useModal } from "../../context/Modal"
 
 let displayText
-const Reviews = ({ spot, page }) => {
+const Reviews = ({ spot }) => {
     const dispatch = useDispatch();
+    const {modalView} = useModal();
     let user = useSelector((state) => state.session.user)
     let spotDetails = useSelector((state) => state.spots[spot.id])
     const [displayReviewForm, setDisplayReviewForm] = useState(false)
@@ -24,9 +27,6 @@ const Reviews = ({ spot, page }) => {
 
     if (!user) user = { id: 0 }
     const priorReview = reviewArray.find((review) => review.User.id === user.id)
-
-    console.log(`spot details`, spotDetails)
-
 
     useEffect(() => {
         if (spot.Owner.id === user.id) {
@@ -72,17 +72,17 @@ const Reviews = ({ spot, page }) => {
                 </div>
                 <p>{(spot.numReview > 0 ? `Based on ${spotDetails.numReview} ${reviewCase}` : '')}</p>
             </div>
-            {(PostButton && !page) && <button onClick={(e) => {
+            {(PostButton && modalView) && <button onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 setDisplayReviewForm(!displayReviewForm)
             }}>{displayText}</button>}
-            {(PostButton && page) && <OpenModalButton buttonText={displayText} modalComponent={<ReviewFormModal spotId={spot.id} userId={user.id}/>}/>}
+            {(PostButton && !modalView) && <OpenModalButton buttonText={displayText} modalComponent={<ReviewFormModal spotId={spot.id} userId={user.id}/>}/>}
 
-            <div>{(displayReviewForm === true && user.id > 0 && !page) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
+            <div>{(displayReviewForm === true && user.id > 0 && modalView) && <ReviewForm spotId={spot.id} userId={user.id} />}</div>
             <div>
                 {reviewArray.map((review) => {
-                    return <SingleReview key={review.id} review={review} page={page}/>
+                    return <SingleReview key={review.id} review={review}/>
                 })}
 
             </div>

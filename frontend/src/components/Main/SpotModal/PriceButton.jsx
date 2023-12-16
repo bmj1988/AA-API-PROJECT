@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import './SpotModal.css';
 
 const PriceButton = ({spot}) => {

@@ -5,6 +5,7 @@ import { reviewsArray } from "../../store/reviews";
 import SingleReview from "../Reviews/SingleReview";
 
 const UserReviews = () => {
+    const currentUser = useSelector((state) => state.session.user)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -12,9 +13,11 @@ const UserReviews = () => {
 
     }, [dispatch]);
 
-    const userReviews = useSelector(reviewsArray);
+    const userReviews = useSelector(reviewsArray).filter((review) => review.userId === currentUser.id);
 
-    if (!userReviews) return 'LOADING > > >'
+    console.log(userReviews)
+
+    if (!userReviews.length) return (<h1 className="textmark"> User has no reviews yet </h1>)
 
     return (
         <>

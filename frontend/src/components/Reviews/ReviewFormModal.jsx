@@ -8,8 +8,8 @@ const ReviewFormModal = ({ spotId, userId }) => {
     const { closeModal } = useModal();
     const dispatch = useDispatch();
     const [review, setReview] = useState('')
-    const [rating, setRating] = useState(5)
-    const [activeRating, setActiveRating] = useState(1)
+    const [rating, setRating] = useState(0)
+    const [activeRating, setActiveRating] = useState(0)
     const [errors, setErrors] = useState(null)
 
     const handleSubmit = async (e) => {

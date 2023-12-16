@@ -7,10 +7,12 @@ import OpenModalMenuItem from "./OpenModalMenuItem";
 import SpotFormModal from "../SpotFormModal/SpotForm";
 import { NavLink, useNavigate } from "react-router-dom";
 import './Navigation.css'
+import { useModal } from "../../context/Modal";
 
 const HomeIcon = ({ user }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const { modalView } = useModal();
     const [showMenu, setShowMenu] = useState(false);
     const menuRef = useRef();
     useEffect(() => {
@@ -57,7 +59,7 @@ const HomeIcon = ({ user }) => {
                             {user.email}
                         </li>
 
-                        <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal />} />
+                        {modalView ? <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal />} /> : <li onClick={() => navigate('/createSpot')} style={{cursor: 'pointer'}}>Create a new Spot</li>}
                         <NavLink to="/current" className={'unstyled'}>Manage Spots</NavLink>
                         <NavLink to="/reviews" className={'unstyled'}>Manage Reviews</NavLink>
                         <li>

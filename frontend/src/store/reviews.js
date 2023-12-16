@@ -5,9 +5,16 @@ import { thunkSpotById } from "./spots"
 /// ACTION TYPES
 const LOADREVIEWS = 'reviews/LOAD'
 const DELETEREVIEW = 'reviews/DEL'
+// const LOADUSERREVIEWS = 'reviews/user/LOAD'
 
 
 /// ACTION CREATORS
+// const loadUserReviews = (reviews) => {
+//     return ({
+//         type: LOADUSERREVIEWS,
+//         reviews : reviews
+//     })
+// }
 
 const loadReviews = (reviews) => {
     return {
@@ -65,13 +72,14 @@ export const thunkAddReview = (review) => async (dispatch) => {
     }
 }
 
-export const thunkDeleteReview = (reviewId) => async (dispatch) => {
-    const response = await csrfFetch(`/api/reviews/${reviewId}`, {
+export const thunkDeleteReview = (review) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, {
         method: 'DELETE'
     })
     if (response.ok) {
         const success = await response.json()
-        dispatch(deleteReview(reviewId))
+        dispatch(deleteReview(review.id))
+        dispatch(thunkSpotById(review.spotId))
         return success.message
     }
     else {
@@ -84,7 +92,7 @@ export const thunkGetUserReviews = () => async (dispatch) => {
     const response = await csrfFetch(`/api/reviews/current`)
     if (response.ok) {
         const userReviews = await response.json();
-        await dispatch(loadReviews(userReviews))
+        dispatch(loadReviews(userReviews))
         return
     }
 }
@@ -99,12 +107,16 @@ export const reviewReducer = (state = {}, action) => {
             action.reviews.Reviews.forEach((review) => {
                 reviewState[review.id] = review;
             })
+            console.log(`!!!!!!!`, reviewState)
             return reviewState;
         }
         case DELETEREVIEW: {
             delete reviewState[action.reviewId]
             return reviewState;
         }
+        // case LOADUSERREVIEWS: {
+
+        // }
         default: {
             return reviewState;
         }

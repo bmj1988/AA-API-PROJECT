@@ -12,13 +12,16 @@ const SpotPage = () => {
     const { id } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(thunkSpotById(Number(id)))
+        const getSpotDetails = async () => {
+            await dispatch(thunkSpotById(id))
+        }
+        getSpotDetails();
     }, [dispatch, id])
 
     const spotInfo = useSelector((state) => state.spots[id])
 
+    if (!spotInfo.Owner) return 'LOADING > > >'
 
-    if (!spotInfo) return 'LOADING > > >'
     const owner = spotInfo.Owner
     return (
         <div className={'spotPageContainer'}>
@@ -27,9 +30,9 @@ const SpotPage = () => {
                 <h2>{`${spotInfo.city}, ${spotInfo.state}, ${spotInfo.country}`}</h2>
             </div>
             <div className={'imageDisplayPage'}>
-                <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage}/>}/>
+                <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage} />} />
                 {spotInfo.SpotImages.map((image) => {
-                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url}/>} />
+                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url} />} />
                 })}
             </div>
             <div className="bioButtonContainer">
@@ -37,12 +40,12 @@ const SpotPage = () => {
                     <h2>{`Hosted by ${owner.firstName} ${owner.lastName}`}</h2>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '800px' }}>
                         <p>{spotInfo.description}</p>
-                        <PriceButton spotInfo={{ ...spotInfo }} style={{ alignSelf: 'center' }} />
+                        <PriceButton spot={{ ...spotInfo }} style={{ alignSelf: 'center' }} />
                     </div>
                 </div>
 
             </div>
-            <Reviews spot={spotInfo} page={true}/>
+            <Reviews spot={spotInfo} page={true} />
         </div>
     )
 }

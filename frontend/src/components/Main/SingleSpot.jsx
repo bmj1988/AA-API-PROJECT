@@ -8,7 +8,7 @@ const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const handleClick = async () => {
-        if (modalView) navigate(`/spots/${spot.id}`)
+        if (!modalView) navigate(`/spots/${spot.id}`)
         else {
         await dispatch(thunkSpotById(spot.id))
         if (typeof onSpotClick === 'function') onSpotClick();
@@ -36,5 +36,3 @@ const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
 }
 
 export default SingleSpot
-
-// <FontAwesomeIcon icon="fa-solid fa-star" /> star for rating

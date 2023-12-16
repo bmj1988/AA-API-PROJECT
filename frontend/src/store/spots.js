@@ -125,7 +125,7 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
 
 export const thunkSpotUpdate = (spot, spotId) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`api/spots/${spotId}`, {
+        const response = await csrfFetch(`/api/spots/${spotId}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
@@ -161,7 +161,7 @@ export const spotsReducer = (state = {}, action) => {
             return spotState;
         }
         case SPOTDETAILS: {
-
+            console.log(`!!!!!!!!!!!!!!!`, action)
             spotState[action.details.id] = action.details
             return spotState
         }

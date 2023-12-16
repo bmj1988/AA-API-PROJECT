@@ -7,6 +7,8 @@ import Main from './components/Main/Main.jsx'
 import ManageSpots from './components/ManageSpotsModal/ManageSpots.jsx';
 import UserReviews from './components/UserReviews/UserReviews.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
+import SpotFormPage from './components/SpotFormPage/SpotFormPage.jsx';
+import SpotUpdatePage from './components/SpotFormPage/SpotUpdatePate.jsx';
 
 
 const Layout = () => {
@@ -53,7 +55,20 @@ const router = createBrowserRouter([
         children: [
           {
             path: ':id',
-            element: <SpotPage/>
+            element: <SpotPage />
+          }
+        ]
+      },
+      {
+        path: '/createSpot',
+        element: <SpotFormPage />
+      },
+      {
+        path: '/updateSpot',
+        children: [
+          {
+            path: ':id',
+            element: <SpotUpdatePage/>
           }
         ]
       }

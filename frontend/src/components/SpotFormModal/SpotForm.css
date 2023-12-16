@@ -9,12 +9,24 @@
     overflow: auto;
 }
 
+.spotFormPageDiv {
+    display: block block;
+    width: 600px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    height: 800px;
+    padding: 30px;
+    margin: auto;
+    overflow:visible;
+}
+
 div.location {
     display: flex;
 }
 
 input.spotInput {
     margin: 5px;
+    width: 90%
 }
 
 div.sectionContainer {
