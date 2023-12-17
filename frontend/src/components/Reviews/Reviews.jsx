@@ -39,12 +39,12 @@ const Reviews = ({ spot }) => {
         else if (user.id === 0) {
             setPostButton(false);
         }
-        else if (spot.numReview > 0) {
+        else if (parseInt(spot.numReview) > 0) {
             displayText = 'Post your review'
             setPostButton(true)
 
         }
-        else if (Number(spot.numReview) < 1) {
+        else if (parseInt(spot.numReview) === 0) {
             displayText = 'Be the first to leave a review!'
             setPostButton(true)
         }
