@@ -9,7 +9,7 @@ import OpenModalImage from "./OpenModalImage";
 import ImageDisplay from "./ImageDisplay";
 
 const SpotPage = () => {
-    const { id } = useParams();
+    let { id } = useParams();
     const dispatch = useDispatch();
     useEffect(() => {
         const getSpotDetails = async () => {

@@ -28,7 +28,7 @@ const SpotModal = ({ spot }) => {
                         <p>{spotInfo.description}</p>
                         <PriceButton spot={{...spotInfo}} style={{alignSelf: 'center'}}/>
                     </div>
-                    <a href={`${base_url}spots/${spotId}`} target="_blank" rel='noreferrer' style={{fontSize:'10px', color: '#1bcdd0'}}> Open in separate tab</a>
+                    <a href={`${base_url}spots/${spotId}`} style={{fontSize:'10px', color: '#1bcdd0'}}> Open in separate tab</a>
                 </div>
 
             </div>

@@ -54,7 +54,7 @@ const router = createBrowserRouter([
         path: '/spots',
         children: [
           {
-            path: ':id',
+            path: '/:id',
             element: <SpotPage />
           }
         ]
@@ -67,7 +67,7 @@ const router = createBrowserRouter([
         path: '/updateSpot',
         children: [
           {
-            path: ':id',
+            path: '/:id',
             element: <SpotUpdatePage/>
           }
         ]
