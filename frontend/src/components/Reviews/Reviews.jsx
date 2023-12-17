@@ -31,27 +31,22 @@ const Reviews = ({ spot }) => {
     useEffect(() => {
         if (spot.Owner.id === user.id) {
             setPostButton(false);
-            return
         }
         else if (priorReview && priorReview.userId === user.id) {
             setPostButton(false);
-            return
 
         }
         else if (user.id === 0) {
             setPostButton(false);
-            return
         }
         else if (spot.numReview > 0) {
             displayText = 'Post your review'
             setPostButton(true)
-            return
 
         }
-        else if (spot.numReview === 0) {
+        else if (Number(spot.numReview) < 1) {
             displayText = 'Be the first to leave a review!'
             setPostButton(true)
-            return
         }
         return
     }, [priorReview, user, spot.Owner.id, spot.numReview])
