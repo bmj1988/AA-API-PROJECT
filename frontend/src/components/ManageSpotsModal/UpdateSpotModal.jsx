@@ -38,7 +38,7 @@ const UpdateSpotModal = ({spot}) => {
             previewImage,
 
         }
-        const res = await dispatch(thunkSpotUpdate(newSpot, spot.id))
+        const res = await dispatch(thunkSpotUpdate(newSpot, spot.id, images))
         if (res.errors) {
             setErrors(res.errors)
             return

@@ -20,7 +20,7 @@ const SpotPage = () => {
 
     const spotInfo = useSelector((state) => state.spots[id])
     console.log(`SPOT INFO HEREEEE`)
-    if (!spotInfo.Owner) return 'LOADING > > >'
+    if (!spotInfo || (spotInfo && !spotInfo.Owner)) return 'LOADING > > >'
     const owner = spotInfo.Owner
     return (
         <div className={'spotPageContainer'}>

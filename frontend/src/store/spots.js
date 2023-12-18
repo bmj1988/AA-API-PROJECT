@@ -6,6 +6,7 @@ import { createSelector } from 'reselect'
 const GETALLSPOTS = 'spots/GetAllSpots'
 const SPOTDETAILS = 'spots/SpotDetails'
 const DELETESPOT = 'spots/DELETE'
+const DELETESPOTIMAGE = 'spots/images/DELETE'
 
 ///ACTION CREATORS
 
@@ -32,6 +33,15 @@ const deleteSpot = (spotId) => {
         type: DELETESPOT,
         spotId
     })
+}
+
+const deleteSpotImage = (imageId) => {
+    return (
+    {
+        type: DELETESPOTIMAGE,
+        imageId
+    }
+    )
 }
 
 /// THUNKS
@@ -77,9 +87,10 @@ export const thunkCreateSpot = (spotDetails, images) => async (dispatch) => {
         })
         if (response.ok) {
             const newSpot = await response.json();
-            if (images.length > 0) {
+            if (Object.values(images).length > 0) {
                 for (let image in images) {
-                    fetchCreateImagesForSpot(image, newSpot.id)
+                    const imageUrl = images[image]
+                    fetchCreateImagesForSpot(imageUrl, newSpot.id)
                 }
             }
             await dispatch(thunkSpotById(newSpot.id))
@@ -123,7 +134,7 @@ export const thunkSpotDelete = (spotId) => async (dispatch) => {
     }
 }
 
-export const thunkSpotUpdate = (spot, spotId) => async (dispatch) => {
+export const thunkSpotUpdate = (spot, spotId, images) => async (dispatch) => {
     try {
         const response = await csrfFetch(`/api/spots/${spotId}`, {
             method: 'PUT',
@@ -134,12 +145,32 @@ export const thunkSpotUpdate = (spot, spotId) => async (dispatch) => {
         })
         if (response.ok) {
             const updatedSpot = await response.json();
+            if (Object.values(images).length > 0) {
+                for (let image in images) {
+                    const imageUrl = images[image]
+                    fetchCreateImagesForSpot(imageUrl, updatedSpot.id)
+                }
+            }
             await dispatch(thunkSpotById(updatedSpot.id));
             return updatedSpot;
         }
     }
     catch (e) {
         return e
+    }
+}
+
+export const thunkDeleteSpotImage = (imageId) => async (dispatch) => {
+    try {
+        const response = await csrfFetch(`/api/images/${imageId}`, {
+            method: 'DELETE'
+        })
+        if (response.ok) {
+            return
+        }
+    } catch (e) {
+        console.log(e)
+        return (e)
     }
 }
 

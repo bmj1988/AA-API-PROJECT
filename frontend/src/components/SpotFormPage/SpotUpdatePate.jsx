@@ -47,7 +47,7 @@ const SpotUpdatePage = () => {
             previewImage,
 
         }
-        const res = await dispatch(thunkSpotUpdate(newSpot, id))
+        const res = await dispatch(thunkSpotUpdate(newSpot, id, images))
         if (res.errors) {
             setErrors(res.errors)
             return
