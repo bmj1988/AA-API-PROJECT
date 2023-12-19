@@ -58,7 +58,6 @@
 
 .priceContainer:hover {
     text-decoration: underline #1bcdd0;
-    font-size: larger;
     position: relative;
 }
 
