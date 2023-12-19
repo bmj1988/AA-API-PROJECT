@@ -52,6 +52,16 @@
     font-size: 50px;
     position: inherit;
     width: 400px;
-    justify-content: space-between;
+    justify-content: center;
     left: -25%;
+}
+
+.arrow {
+    cursor: pointer;
+}
+
+.imageDisplayDelete {
+    border-radius: 10%;
+    cursor: pointer;
+    margin: 0px 40px;
 }

@@ -21,6 +21,9 @@ const SpotPage = () => {
     const spotInfo = useSelector((state) => state.spots[id])
     if (!spotInfo || (spotInfo && !spotInfo.Owner)) return 'LOADING > > >'
     const owner = spotInfo.Owner
+    const imageCarousel = [{url: spotInfo.previewImage}]
+    spotInfo.SpotImages.forEach((image) => imageCarousel.push(image))
+
     return (
         <div className={'spotPageContainer'}>
             <div className={'topLine'}>
@@ -28,9 +31,9 @@ const SpotPage = () => {
                 <h2>{`${spotInfo.city}, ${spotInfo.state}, ${spotInfo.country}`}</h2>
             </div>
             <div className={'imageDisplayPage'}>
-                <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage} />} />
+                <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage} spotInfo={spotInfo} imageCarousel={imageCarousel}/>} />
                 {spotInfo.SpotImages.map((image) => {
-                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url} spotInfo={spotInfo} id={image.id}/>} />
+                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url} spotInfo={spotInfo} id={image.id} imageCarousel={imageCarousel}/>} />
                 })}
             </div>
             <div className="bioButtonContainer">
