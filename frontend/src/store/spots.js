@@ -165,6 +165,19 @@ export const thunkDeleteSpotImage = (imageId, spotId) => async (dispatch) => {
     }
 }
 
+export const thunkSpotSearch = (searchObj) => async (dispatch) => {
+    try {const response = await csrfFetch(`api/spots`)
+    if (response.ok) {
+        const searchedSpots = results.json()
+        dispatch(getAllSpots(searchedSpots))
+        return searchedSpots
+    }}
+    catch (e) {
+        console.log(e)
+        return (e)
+    }
+}
+
 /// SELECTORS
 
 export const spotsArray = createSelector((state) => state.spots, (spots) => {
