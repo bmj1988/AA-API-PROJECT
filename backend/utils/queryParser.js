@@ -3,7 +3,7 @@ const {sequelize} = require('../db/models')
 let commandPath = 'Reviews'
 let spotsPath = 'spotId'
 if (process.env.NODE_ENV === 'production') {
-    commandPath = '"aa_api_project_schema"."Spots"'
+    commandPath = '"aa_api_project_schema"."Reviews"'
     spotsPath = '"spotId"'
 }
 
