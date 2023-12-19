@@ -1,5 +1,11 @@
 const Sequelize = require('sequelize')
 const {sequelize} = require('../db/models')
+let commandPath = 'Reviews'
+let spotsPath = 'spotId'
+if (process.env.NODE_ENV === 'production') {
+    commandPath = '"aa_api_project_schema".${commandPath}'
+    spotsPath = '"spotId"'
+}
 
 const queryParser = async function (req, res, next) {
     const errors = {}
@@ -27,12 +33,12 @@ const queryParser = async function (req, res, next) {
 }
 
 const avgRater = async function (spotId) {
-    let avgRating = await sequelize.query(`SELECT ROUND(AVG(stars), 2) from Reviews WHERE spotId = ${spotId}`)
+    let avgRating = await sequelize.query(`SELECT ROUND(AVG(stars), 2) from ${commandPath} WHERE ${spotsPath} = ${spotId}`)
         avgRating = Object.values(avgRating[0][0])
         return avgRating[0]
 }
 const numReviews = async function (spotId) {
-    let count = await sequelize.query(`SELECT COUNT(*) from Reviews WHERE spotId = ${spotId}`)
+    let count = await sequelize.query(`SELECT COUNT(*) from ${commandPath} WHERE ${spotsPath} = ${spotId}`)
     count = Object.values(count[0][0])
     return count[0]
 }
