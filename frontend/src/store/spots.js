@@ -6,7 +6,6 @@ import { createSelector } from 'reselect'
 const GETALLSPOTS = 'spots/GetAllSpots'
 const SPOTDETAILS = 'spots/SpotDetails'
 const DELETESPOT = 'spots/DELETE'
-const DELETESPOTIMAGE = 'spots/images/DELETE'
 
 ///ACTION CREATORS
 
@@ -33,15 +32,6 @@ const deleteSpot = (spotId) => {
         type: DELETESPOT,
         spotId
     })
-}
-
-const deleteSpotImage = (imageId) => {
-    return (
-    {
-        type: DELETESPOTIMAGE,
-        imageId
-    }
-    )
 }
 
 /// THUNKS
@@ -160,12 +150,13 @@ export const thunkSpotUpdate = (spot, spotId, images) => async (dispatch) => {
     }
 }
 
-export const thunkDeleteSpotImage = (imageId) => async (dispatch) => {
+export const thunkDeleteSpotImage = (imageId, spotId) => async (dispatch) => {
     try {
-        const response = await csrfFetch(`/api/images/${imageId}`, {
+        const response = await csrfFetch(`/api/spot-images/${imageId}`, {
             method: 'DELETE'
         })
         if (response.ok) {
+            dispatch(thunkSpotById(spotId))
             return
         }
     } catch (e) {
@@ -192,7 +183,7 @@ export const spotsReducer = (state = {}, action) => {
             return spotState;
         }
         case SPOTDETAILS: {
-            console.log(`!!!!!!!!!!!!!!!`, action)
+            delete spotState[action.details.id]
             spotState[action.details.id] = action.details
             return spotState
         }

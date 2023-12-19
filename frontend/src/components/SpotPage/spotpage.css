@@ -46,3 +46,12 @@
     left: -80%;
     bottom: -1210%;
 }
+
+.imageDisplayButtons {
+    display: flex;
+    font-size: 50px;
+    position: inherit;
+    width: 400px;
+    justify-content: space-between;
+    left: -25%;
+}

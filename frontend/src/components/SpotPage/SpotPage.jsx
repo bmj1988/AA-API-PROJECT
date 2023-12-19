@@ -19,7 +19,6 @@ const SpotPage = () => {
     }, [dispatch, id])
 
     const spotInfo = useSelector((state) => state.spots[id])
-    console.log(`SPOT INFO HEREEEE`)
     if (!spotInfo || (spotInfo && !spotInfo.Owner)) return 'LOADING > > >'
     const owner = spotInfo.Owner
     return (
@@ -31,7 +30,7 @@ const SpotPage = () => {
             <div className={'imageDisplayPage'}>
                 <OpenModalImage url={spotInfo.previewImage} Class="spotPageImage" modalComponent={<ImageDisplay url={spotInfo.previewImage} />} />
                 {spotInfo.SpotImages.map((image) => {
-                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url} />} />
+                    return <OpenModalImage key={image.id} url={image.url} Class={'spotPageImage'} modalComponent={<ImageDisplay url={image.url} spotInfo={spotInfo} id={image.id}/>} />
                 })}
             </div>
             <div className="bioButtonContainer">
