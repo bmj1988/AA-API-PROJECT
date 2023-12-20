@@ -59,7 +59,7 @@ const SpotUpdatePage = () => {
 
     return (
         <div className='spotFormDiv spotFormPageDiv'>
-            <h1 className='spotFormHeader'>Create a New Spot</h1>
+            <h1 className='spotFormHeader'>Update your spot</h1>
             <form onSubmit={onSubmit} className="spotForm">
                 <div className='sectionContainer'>
                     <h2>{"Where's your place located?"}</h2>
@@ -83,9 +83,9 @@ const SpotUpdatePage = () => {
                 <div className='sectionContainer'>
                     <h2>Describe your place to guests</h2>
                     <p>Mention the best features of your space, any special amentities like
-                        fast wif or parking, and what you love about the neighborhood.</p>
+                        fast wifi or parking, and what you love about the neighborhood.</p>
                     {errors.description && <p className='errors'>{errors.description}</p>}
-                    <textarea name='description' rows={8} cols={60} value={description} className={`spotDescription`} onChange={(e) => setDescription(e.target.value)} />
+                    <textarea maxLength={1000} name='description' rows={8} cols={60} value={description} className={`spotDescription`} onChange={(e) => setDescription(e.target.value)} />
                 </div>
                 <div className='sectionContainer'>
                     <h2>Create a title for your spot</h2>
@@ -115,7 +115,7 @@ const SpotUpdatePage = () => {
                     <input name='image' type='url' placeholder='Image URL' className={`spotInput`} onChange={(e) => setImages({ ...images, 4: e.target.value })} />
                 </div>
                 <div className='location button'>
-                    <button className='spotSend'>Create Spot</button>
+                    <button className='spotSend'>Update your spot</button>
                 </div>
 
             </form>

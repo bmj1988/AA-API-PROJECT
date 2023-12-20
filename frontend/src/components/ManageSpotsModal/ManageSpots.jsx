@@ -26,7 +26,7 @@ const ManageSpots = () => {
         dispatch(thunkGetOwnSpots())
             .then(() => setOnSpotsLoaded(true));
     })
-
+    console.log(`OWN SPOTS`, ownSpots)
 
     if (!ownSpots) return (
         <div className='masterDiv'>

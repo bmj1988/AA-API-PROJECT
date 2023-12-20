@@ -32,6 +32,7 @@ const ReviewForm = ({ spotId, userId }) => {
     return (
         <div className={submitted ? 'hidden' : ''}>
             <form onSubmit={(e) => handleSubmit(e)}>
+                {errors && <p className="errors">{errors}</p>}
                 <h5 className="textmark">How was your stay?</h5>
                 {errors && errors.map((error) => {
                     return (
@@ -55,8 +56,8 @@ const ReviewForm = ({ spotId, userId }) => {
                         <i className="fa-solid fa-star"></i>
                     </div>
                 </div>
-                <textarea rows='8' className="textmark reviewText" placeholder="Leave your review here" autoFocus onChange={(e) => setReview(e.target.value)} />
-                <button disabled={review.length < 10}>Submit Your Review</button>
+                <textarea rows='8' className="textmark reviewText" minLength={10} maxLength={500} placeholder="Leave your review here" autoFocus onChange={(e) => setReview(e.target.value)} />
+                <button disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
             </form>
         </div>
     )

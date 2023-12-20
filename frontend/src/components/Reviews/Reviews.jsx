@@ -62,8 +62,8 @@ const Reviews = ({ spot }) => {
         <div className='reviewContainer'>
             <div className={`starRating reviewRunnerInPage`}>
                 <div style={{ display: 'flex', alignItems: 'center' }}>
-                    <i className="fa-solid fa-star" />
-                    <p style={{ marginLeft: '5px' }}>{(spotDetails.avgRating ? spotDetails.avgRating : 'New')}</p>
+                    <i className="fa-solid fa-star larger" />
+                    <p style={{ marginLeft: '5px' }} className="larger">{(spotDetails.avgRating ? spotDetails.avgRating : 'New')}</p>
                 </div>
                 <p>{(spot.numReview > 0 ? `Based on ${spotDetails.numReview} ${reviewCase}` : '')}</p>
             </div>
