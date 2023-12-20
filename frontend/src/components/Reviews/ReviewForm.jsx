@@ -56,7 +56,7 @@ const ReviewForm = ({ spotId, userId }) => {
                         <i className="fa-solid fa-star"></i>
                     </div>
                 </div>
-                <textarea rows='8' className="textmark reviewText" minLength={10} maxLength={500} placeholder="Leave your review here" autoFocus onChange={(e) => setReview(e.target.value)} />
+                <textarea rows='8' className="textmark" minLength={10} maxLength={500} placeholder="Leave your review here" autoFocus onChange={(e) => setReview(e.target.value)} />
                 <button disabled={review.length < 10 || rating < 1}>Submit Your Review</button>
             </form>
         </div>
