@@ -146,7 +146,8 @@ export const thunkSpotUpdate = (spot, spotId, images) => async (dispatch) => {
         }
     }
     catch (e) {
-        return e
+        const errors = await e.json()
+        return errors
     }
 }
 
