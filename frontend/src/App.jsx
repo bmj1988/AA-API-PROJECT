@@ -9,6 +9,7 @@ import UserReviews from './components/UserReviews/UserReviews.jsx';
 import SpotPage from './components/SpotPage/SpotPage.jsx';
 import SpotFormPage from './components/SpotFormPage/SpotFormPage.jsx';
 import SpotUpdatePage from './components/SpotFormPage/SpotUpdatePate.jsx';
+import SearchPage from './components/SearchPage/SearchPage.jsx';
 
 
 const Layout = () => {
@@ -71,6 +72,10 @@ const router = createBrowserRouter([
             element: <SpotUpdatePage/>
           }
         ]
+      },
+      {
+        path: '/search',
+        element: <SearchPage/>
       }
 
     ]

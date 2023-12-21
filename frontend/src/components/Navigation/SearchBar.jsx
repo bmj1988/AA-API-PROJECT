@@ -5,11 +5,12 @@ import { useNavigate } from 'react-router-dom';
 import { thunkSpotSearch } from '../../store/spots';
 import { useSearch } from '../../context/Search';
 import FilterMenu from './FilterMenu';
+
 const SearchBar = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const [searchString, setSearchString] = useState('')
-    const [showFilterMenu, setShowFilterMenu] = useState(false)
+    const [locality, setLocality] = useState('')
+
 
     const {
         minLat,
@@ -18,34 +19,46 @@ const SearchBar = () => {
         maxLng,
         minPrice,
         maxPrice,
+        showFilterMenu,
+        setShowFilterMenu
     } = useSearch();
 
-    const searchSpots = async () => {
+    const searchSpots = async (e) => {
+        e.preventDefault();
         const searchObj = {
-            minLat,
-            maxLat,
-            minLng,
-            maxLng,
-            minPrice,
-            maxPrice,
-            searchString
+            minLat: minLat.toString(),
+            maxLat: maxLat.toString(),
+            minLng: minLng.toString(),
+            maxLng: maxLng.toString(),
+            minPrice: minPrice.toString(),
+            maxPrice: maxPrice.toString(),
+            locality
 
         }
-
-        const searchedSpots = await dispatch(thunkSpotSearch(searchObj))
-        navigate('/search', {...searchedSpots})
+        console.log(Object.entries(searchObj))
+        const params = new URLSearchParams(Object.entries(searchObj)).toString();
+        console.log(`PARAMS`, params)
+        const searchedSpots = await dispatch(thunkSpotSearch(params))
+        console.log(`SEARCHEDSPOTS`, searchedSpots)
+        navigate(`/search?${params}`, { state: searchedSpots })
     }
 
 
     return (
-    <form className='searchBar'>
-        <button onClick={() => setShowFilterMenu(!showFilterMenu)}><i class="fa-solid fa-toggle-off colormark"/></button>
-        {showFilterMenu && <FilterMenu/>}
-        <input type='search' placeholder='Enter a destination' className='searchTextInput' onChange={setSearchString(e.target.value)}/>
+        <div style={{ display: 'flex' }}>
+            <button className='filterButton' onClick={(e) => {
+                e.preventDefault();
+                setShowFilterMenu(!showFilterMenu)
+            }}><i className="fa-solid fa-toggle-off colormark filterIcon" /></button>
+            {showFilterMenu && <FilterMenu/>}
+            <form className='searchBar'>
 
-       <button className='modalMenuItem' onClick={() => searchSpots()} disabled={searchString.length < 1}> <i className="fa-solid fa-trowel-bricks" style={{ color: "#1bcdd0", fontSize: "33px", border: 'none' }} /></button>
+                <input type='search' placeholder='Enter a destination' className='searchTextInput' onChange={(e) => setLocality(e.target.value)} />
 
-    </form>)
+                <button className='modalMenuItem' onClick={(e) => searchSpots(e)}> <i className="fa-solid fa-trowel-bricks" style={{ color: "#1bcdd0", fontSize: "33px", border: 'none' }} /></button>
+
+            </form>
+        </div>)
 }
 
 export default SearchBar

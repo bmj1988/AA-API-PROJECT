@@ -73,8 +73,8 @@ ul {
     text-align: center;
     background-color: white;
     z-index: 5;
-    border-left: thick double lightgray;
-    border-bottom: thick double lightgray;
+    border-left: thick double #1bcdd0;
+    border-bottom: thick double #1bcdd0;
 }
 
 .modalMenuItem {
@@ -99,4 +99,14 @@ ul {
 .dropDownElement {
     border-bottom: 1px solid lightgray;
     margin-bottom: 5px;
+}
+
+.searchFilterForm {
+    position:absolute;
+    background-color: white;
+    top: 85px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    border: thick double #1bcdd0;
 }

@@ -3,7 +3,7 @@ const { requireAuth, restoreUser, userMatch, exists, info, requireAuthorizeSpot,
 const { queryParser, avgRater, numReviews } = require('../../utils/queryParser')
 const router = express.Router();
 const Sequelize = require('sequelize')
-const {checkBookingConflictsSPOT} = require('../../utils/bookingChecker')
+const { checkBookingConflictsSPOT } = require('../../utils/bookingChecker')
 const { Spot, User, Image, Review, sequelize } = require('../../db/models')
 const Op = Sequelize.Op;
 
@@ -17,21 +17,24 @@ router.get('/', queryParser, async (req, res) => {
     const spotsArray = []
     const query = {}
     const returbObj = {};
+    const whereObj = {
+        lat: { [Op.between]: [req.minLat, req.maxLat] },
+        lng: { [Op.between]: [req.minLng, req.maxLng] },
+        price: { [Op.between]: [req.minPrice, req.maxPrice] }
+    }
     if (req.query.size) {
         returbObj.size = req.query.size
     }
     if (req.query.page) {
         returbObj.page = req.query.page
     }
+    if (req.query.locality) {
+        whereObj.city = {[Op.like] : req.query.locality }
+    }
     query.limit = req.querySize;
     query.offset = req.querySize * (req.queryPage - 1)
     const spots = await Spot.findAll({
-        where: {
-            lat: {[Op.between]: [req.minLat, req.maxLat]},
-            lng: {[Op.between]: [req.minLng, req.maxLng]},
-            price: {[Op.between]: [req.minPrice, req.maxPrice]}
-
-        },
+        where: whereObj,
         ...query
     })
 
@@ -46,7 +49,7 @@ router.get('/', queryParser, async (req, res) => {
 
 
 
-    res.json({Spots: spotsArray, ...returbObj})
+    res.json({ Spots: spotsArray, ...returbObj })
 })
 
 /// GET ALL SPOTS WHERE CURRENT (LOGGED IN) USER ID = SPOTS.OWNERID
@@ -105,7 +108,7 @@ router.get('/:spotId', [info, exists], async (req, res, next) => {
 
 router.post('/', requireAuth, async (req, res) => {
     const user = req.user
-    const newSpot = await user.createSpot(req.body, {validate: true})
+    const newSpot = await user.createSpot(req.body, { validate: true })
     const displaySpot = await Spot.findByPk(newSpot.id, {
         attributes: {
             exclude: ['previewImage']
@@ -124,7 +127,7 @@ router.post('/:spotId/images', [requireAuth, requireAuthorizeSpot], async (req, 
         err.status = 400
         return next(err)
     }
-    if (await spot.getSpotImages({where: {url: url}}).length > 0) {
+    if (await spot.getSpotImages({ where: { url: url } }).length > 0) {
         const err = new Error('This image URL is already in use!')
         err.status = 400
         return next(err)
@@ -134,7 +137,7 @@ router.post('/:spotId/images', [requireAuth, requireAuthorizeSpot], async (req, 
         imageableType: 'Spot',
         url,
         preview,
-    }, {validate: true})
+    }, { validate: true })
     if (spotImage.preview === true) await spot.update({
         previewImage: spotImage.url
     })
@@ -170,7 +173,7 @@ router.delete('/:spotId', [requireAuth, requireAuthorizeSpot], async (req, res, 
 
 /// GET A SPOT'S REVIEWS BY SPOTID
 
-router.get('/:spotId/reviews',[info, exists], async (req, res) => {
+router.get('/:spotId/reviews', [info, exists], async (req, res) => {
     const spot = await Spot.findByPk(req.params.spotId)
     const reviews = await spot.getReviews({
         include: [{
@@ -184,14 +187,14 @@ router.get('/:spotId/reviews',[info, exists], async (req, res) => {
         }]
     })
 
-    res.json({Reviews: reviews})
+    res.json({ Reviews: reviews })
 })
 
 ///CREATE REVIEW BY SPOT ID
 
 router.post('/:spotId/reviews', [requireAuth, info, exists], async (req, res, next) => {
     const spot = await Spot.findByPk(req.params.spotId)
-    if (spot.ownerId === req.user.id) res.status(403).json({message: `You cannot review your own spots!`})
+    if (spot.ownerId === req.user.id) res.status(403).json({ message: `You cannot review your own spots!` })
     const reviews = await Review.findAll({
         where: {
             spotId: spot.id,
@@ -233,7 +236,7 @@ router.post('/:spotId/bookings', [requireAuth, info, exists, userMatch, checkBoo
     const booking = await spot.createBooking({
         userId: req.user.id,
         ...req.body
-    }, {validate: true})
+    }, { validate: true })
     res.json(booking)
 })
 

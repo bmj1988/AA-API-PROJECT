@@ -67,17 +67,17 @@ const SpotUpdatePage = () => {
                         reservation</p>
 
                     <label htmlFor='country'>Country</label> {errors.country && <p className='errors'>{errors.country}</p>}
-                    <input name='country' type='text' value={country} className={`spotInput`} onChange={(e) => setCountry(e.target.value)} />
+                    <input name='country' maxLength={50} type='text' value={country} className={`spotInput`} onChange={(e) => setCountry(e.target.value)} />
                     <label htmlFor='address'>Street Address</label>{errors.address && <p className='errors'>{errors.address}</p>}
-                    <input name='address' type='text' value={address} className={`spotInput`} onChange={(e) => setAddress(e.target.value)} />
+                    <input name='address' maxLength={200} type='text' value={address} className={`spotInput`} onChange={(e) => setAddress(e.target.value)} />
 
                     <div className='location'>
                         <label htmlFor='city'>City</label>
                         {errors.city && <p className='errors'>{errors.city}</p>}
-                        <input name='city' type='text' value={city} className={`spotInput`} onChange={(e) => setCity(e.target.value)} />
+                        <input name='city' maxLength={50} type='text' value={city} className={`spotInput`} onChange={(e) => setCity(e.target.value)} />
                         <label htmlFor='state'>State</label>
                         {errors.state && <p className='errors'>{errors.state}</p>}
-                        <input name='state' type='text' value={state} className={`spotInput`} onChange={(e) => setState(e.target.value)} />
+                        <input name='state' maxLength={50} type='text' value={state} className={`spotInput`} onChange={(e) => setState(e.target.value)} />
                     </div>
                 </div>
                 <div className='sectionContainer'>
@@ -92,7 +92,7 @@ const SpotUpdatePage = () => {
                     <p>{`Catch guests' attention with a spot title that highlights what makes
                         your place special.`}</p>
                     {errors.name && <p className='errors'>{errors.name}</p>}
-                    <input name='name' type='text' value={name} className={`spotInput`} onChange={(e) => setName(e.target.value)} />
+                    <input name='name' maxLength={100} type='text' value={name} className={`spotInput`} onChange={(e) => setName(e.target.value)} />
                 </div>
                 <div className='sectionContainer'>
                     <h2>Set a base price for your spot</h2>
@@ -101,7 +101,7 @@ const SpotUpdatePage = () => {
                     </p>
                     <div className='location'>
                         {errors.price && <p className='errors'>{errors.price}</p>}
-                        {'$'}<input name='price' type='number' value={price} className={`spotInput`} onChange={(e) => setPrice(Number(e.target.value))} />
+                        {'$'}<input name='price' min={0} type='number' value={price} className={`spotInput`} onChange={(e) => setPrice(Number(e.target.value))} />
                     </div>
                 </div>
                 <div className='sectionContainer'>

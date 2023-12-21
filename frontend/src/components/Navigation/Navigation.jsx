@@ -12,7 +12,6 @@ const NavBar = ({ userFetched }) => {
     const sessionState = useSelector(state => state.session.user)
     const { modalView, setModalView } = useModal();
     const navigate = useNavigate();
-    console.log(`SESSION STATE`, sessionState)
 
     const toggleModal = (e) => {
         e.preventDefault();

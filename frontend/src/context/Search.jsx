@@ -13,6 +13,7 @@ export function SearchProvider({children}) {
     const [maxLng, setMaxLng] = useState(180);
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(1000);
+    const [showFilterMenu, setShowFilterMenu] = useState(false)
 
     const searchValues = {
         minLat,
@@ -26,7 +27,9 @@ export function SearchProvider({children}) {
         minPrice,
         setMinPrice,
         maxPrice,
-        setMaxPrice
+        setMaxPrice,
+        showFilterMenu,
+        setShowFilterMenu,
     }
 
     return (

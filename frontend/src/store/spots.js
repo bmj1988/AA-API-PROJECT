@@ -166,14 +166,15 @@ export const thunkDeleteSpotImage = (imageId, spotId) => async (dispatch) => {
     }
 }
 
-export const thunkSpotSearch = (searchObj) => async (dispatch) => {
-    try {const response = await csrfFetch(`api/spots`)
+export const thunkSpotSearch = (params) => async (dispatch) => {
+    try {const response = await csrfFetch(`api/spots?${params}`)
     if (response.ok) {
-        const searchedSpots = results.json()
-        dispatch(getAllSpots(searchedSpots))
+        const searchedSpots = await response.json()
+        console.log(searchedSpots)
         return searchedSpots
     }}
     catch (e) {
+        // const error = await e.json();
         console.log(e)
         return (e)
     }
