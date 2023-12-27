@@ -28,7 +28,7 @@ const SingleSpot = ({ spot, modalComponent, onSpotClick, onModalClose }) => {
                         <i className="fa-solid fa-star" />{spot.avgRating || 'New'}
                     </div>
                 </div>
-                <div style={{ display: 'flex' }}><p className={'priceContainer'}><span className="spotPrice">{`$${spot.price} `}</span>{'per night'}</p></div>
+                <div style={{ display: 'flex' }}><p className={'priceContainer'}><span className="spotPrice">{`$${spot.price.toFixed(2)} `}</span>{'per night'}</p></div>
 
             </div>
         </div>

@@ -1,13 +1,11 @@
 import { useSelector } from 'react-redux';
 import './SpotModal.css';
-import OpenModalButton from '../../OpenModalButton/OpenModalButton';
-import DateChecker from './DateChecker';
+import { useModal } from '../../../context/Modal'
 import { datesArray } from '../../../store/stay';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
-const PriceButton = ({ spot, user }) => {
-    const navigate = useNavigate();
+const PriceButtonOnModal = ({ spot, user }) => {
+    const { closeModal } = useModal();
     const spotInfo = useSelector((state) => state.spots[spot.id])
     const [startDate, endDate] = useSelector(datesArray)
     const [days, setDays] = useState(null)
@@ -38,9 +36,16 @@ const PriceButton = ({ spot, user }) => {
             spotId: spot.id,
             userId: user.id
         }
-        navigate(`/book/${spotInfo.id}`, { state: { booking: reservation } })
-
+        closeModal();
     }
+
+    const reserve = (e) => {
+        e.preventDefault();
+        alert('Feature coming soon!')
+        return;
+    }
+
+
 
     /// reviewCase is a great candidate for refactoring, this same section is used many times
     let reviewCase;
@@ -61,8 +66,7 @@ const PriceButton = ({ spot, user }) => {
                 </div>
             </div>
             <div className={"buttonDiv"}>
-                {(!startDate && !endDate) && <OpenModalButton buttonStyling={'reserveButton'} buttonText={'Check Availability'} modalComponent={<DateChecker spotId={spot.id} />} />}
-                {(startDate && endDate) && <button className={'reserveButton'} onClick={(e) => reserveDates(e)}> Reserve </button>}
+                <button onClick={(e) => reserve(e)} className={'reserveButton'}>Reserve</button>
             </div>
             {startDate && endDate && total && grandTotal && <div className='priceDiv'>
                 <div className='priceItem'>
@@ -83,4 +87,4 @@ const PriceButton = ({ spot, user }) => {
     )
 }
 
-export default PriceButton;
+export default PriceButtonOnModal;

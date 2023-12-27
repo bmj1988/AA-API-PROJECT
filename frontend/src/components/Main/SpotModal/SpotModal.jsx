@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import './SpotModal.css'
-import PriceButton from "./PriceButton";
 import Reviews from "../../Reviews/Reviews";
+import PriceButtonOnModal from "./PriceButtonOnModal";
 
 
 const SpotModal = ({ spot }) => {
@@ -24,7 +24,7 @@ const SpotModal = ({ spot }) => {
                     <h2>{`Hosted by ${owner.firstName} ${owner.lastName}`}</h2>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '800px' }}>
                         <p>{spotInfo.description}</p>
-                        <PriceButton spot={{ ...spotInfo }} style={{ alignSelf: 'center' }} />
+                        <PriceButtonOnModal spot={{ ...spotInfo }} style={{ alignSelf: 'center' }} />
                     </div>
                 </div>
 

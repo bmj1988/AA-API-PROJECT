@@ -37,9 +37,7 @@ const SearchBar = () => {
         }
         console.log(Object.entries(searchObj))
         const params = new URLSearchParams(Object.entries(searchObj)).toString();
-        console.log(`PARAMS`, params)
         const searchedSpots = await dispatch(thunkSpotSearch(params))
-        console.log(`SEARCHEDSPOTS`, searchedSpots)
         navigate(`/search?${params}`, { state: searchedSpots })
     }
 

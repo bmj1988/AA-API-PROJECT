@@ -62,6 +62,7 @@ const HomeIcon = ({ user }) => {
                         {modalView ? <OpenModalMenuItem itemText={'Create a new Spot'} onItemClick={() => setShowMenu(false)} modalComponent={<SpotFormModal />} /> : <li onClick={() => navigate('/createSpot')} style={{cursor: 'pointer'}}>Create a new Spot</li>}
                         <NavLink to="/current" className={'unstyled'}>Manage Spots</NavLink>
                         <NavLink to="/reviews" className={'unstyled'}>Manage Reviews</NavLink>
+                        <NavLink to="/bookings" className={'unstyled'}>Manage Bookings</NavLink>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>

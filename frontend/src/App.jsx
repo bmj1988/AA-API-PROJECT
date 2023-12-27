@@ -10,6 +10,9 @@ import SpotPage from './components/SpotPage/SpotPage.jsx';
 import SpotFormPage from './components/SpotFormPage/SpotFormPage.jsx';
 import SpotUpdatePage from './components/SpotFormPage/SpotUpdatePate.jsx';
 import SearchPage from './components/SearchPage/SearchPage.jsx';
+import BookingPage from './components/BookingPage/BookingPage.jsx';
+import ManageBookings from './components/ManageBookings/ManageBookings.jsx';
+import EditBookingPage from './components/BookingPage/EditBookingPage.jsx';
 
 
 const Layout = () => {
@@ -69,15 +72,36 @@ const router = createBrowserRouter([
         children: [
           {
             path: ':id',
-            element: <SpotUpdatePage/>
+            element: <SpotUpdatePage />
           }
         ]
       },
       {
         path: '/search',
-        element: <SearchPage/>
+        element: <SearchPage />
+      },
+      {
+        path: '/book',
+        children: [
+          {
+            path: ':spotId',
+            element: <BookingPage />
+          }
+        ]
+      },
+      {
+        path: '/bookings',
+        element: <ManageBookings/>,
+      },
+      {
+        path: 'editBooking',
+        children: [
+          {
+            path: ':bookingId',
+            element: <EditBookingPage />
+          }
+        ]
       }
-
     ]
   },
 ])

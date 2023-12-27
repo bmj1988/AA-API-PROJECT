@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { thunkAllSpots } from "../../store/spots";
-// import { GridLoader } from 'react-spinners/GridLoader'
 import { spotsArray } from "../../store/spots";
 import './main.css'
 import SingleSpot from "./SingleSpot";
 import SpotModal from "./SpotModal/SpotModal";
+import Spinner from "../Spinner";
+
 
 
 const Main = () => {
@@ -19,7 +20,9 @@ const Main = () => {
 
     const spots = useSelector(spotsArray)
 
-    if (!spotsLoaded) return `LOADING > > >`
+    if (!spotsLoaded) return (
+        <Spinner/>
+    )
 
 
     return (

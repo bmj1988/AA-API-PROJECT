@@ -88,11 +88,14 @@ export const thunkLogout = () => async (dispatch) => {
             return deleteOk
         }
         else {
+            console.log(`1`, response)
             throw response
         }
     }
     catch (e) {
+        console.log(`2`, e)
         const error = await e.json();
+        console.log(`3`, error)
         return error
     }
 }

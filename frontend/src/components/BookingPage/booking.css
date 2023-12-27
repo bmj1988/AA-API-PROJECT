@@ -1,0 +1,18 @@
+.bookingMain {
+    margin: auto;
+    width: 1000px;
+}
+
+.standardP {
+    font-size: 18px;
+}
+
+.cardInfo {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+}
+
+.ccInput {
+    width: 300px;
+}

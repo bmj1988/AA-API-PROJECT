@@ -1,6 +1,6 @@
 import { useModal } from "../../context/Modal"
 
-const OpenModalButton = ({modalComponent, buttonText, onButtonClick, onModalClose}) => {
+const OpenModalButton = ({modalComponent, buttonText, onButtonClick, onModalClose, buttonStyling}) => {
     const {setModalContent, setOnModalClose} = useModal();
 
     const handleClick = () => {
@@ -8,9 +8,10 @@ const OpenModalButton = ({modalComponent, buttonText, onButtonClick, onModalClos
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
     }
-
+    let cssStyling = ''
+    if (buttonStyling) cssStyling = buttonStyling
     return (
-        <button style={{cursor: 'pointer'}} onClick={handleClick}>
+        <button style={{cursor: 'pointer'}} className={buttonStyling} onClick={handleClick}>
             {buttonText}
         </button>
     )

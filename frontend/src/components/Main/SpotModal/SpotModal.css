@@ -63,8 +63,13 @@
 
 .priceButtonContainer {
     width: 300px;
-    height: 200px;
-    display: block;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-shadow: lightgray 1px 1px 5px;
+    padding: 20px;
+    border-radius: 12px;
 }
 .buttonDiv {
     display: flex;
@@ -73,12 +78,73 @@
 
 }
 .reserveButton {
-    width: 200px;
-    height: 40px;
+    width: 250px;
+    height: 60px;
     right: 80px;
-    margin-left:20px
+    margin-left:20px;
+    background-color: #1bcdd0;
+    color: white;
+    font-size: 20px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
 }
 
 .loginButton {
     cursor: pointer
 }
+
+.datePicker {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1bcdd0;
+    border-radius: 10%;
+}
+
+.dateBox {
+    width: 300px;
+    height: 25px;
+    margin-top: 20px;
+}
+
+.dateCheckButtonDiv {
+    display: block;
+}
+
+.aForm {
+    background-color: white;
+    width: 400px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0 0 10% 10%
+
+}
+
+.priceItem {
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.lastPrice {
+    border-bottom: 1px solid lightgray;
+}
+
+.priceTotal{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* .priceButtonComponent {
+    position: sticky;
+    top: 50px;
+} */
+/* .dateCheckButtonDiv > .dateCheckButton {
+
+} */
