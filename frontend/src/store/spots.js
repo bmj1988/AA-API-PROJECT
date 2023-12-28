@@ -192,7 +192,11 @@ export const spotsReducer = (state = {}, action) => {
     switch (action.type) {
         case GETALLSPOTS: {
             spotState = {};
-            action.spots.Spots.forEach((spot) => spotState[spot.id] = spot)
+            action.spots.Spots.forEach((spot) => {
+                spotState[spot.id] = spot
+                spotState[spot.id].price = Number(spotState[spot.id].price)
+            })
+
             return spotState;
         }
         case SPOTDETAILS: {

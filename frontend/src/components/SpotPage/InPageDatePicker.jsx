@@ -14,6 +14,7 @@ const InPageDatePicker = ({ spotId }) => {
         console.log(startDate, endDate, `This is how many times useEffect will run`)
         dispatch(loadStayDates([startDate, endDate]))
     }, [startDate, endDate, dispatch])
+
     useEffect(() => {
         const fastChecker = async () => {
             const dates = await thunkDateCheckerDisabledList(spotId)
@@ -29,7 +30,6 @@ const InPageDatePicker = ({ spotId }) => {
         }
         fastChecker();
     }, [dispatch, spotId])
-    // const spotBookings = csrfFetch(`/api/spots/${spotId}/bookings`).then((data) => data.json()).then((data) => console.log(`Spot bookings`, data.Bookings))
 
 
     return (

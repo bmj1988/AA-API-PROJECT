@@ -22,11 +22,11 @@ const SpotPage = () => {
         getSpotDetails();
     }, [dispatch, id])
 
-    const spotInfo = useSelector((state) => state.spots[id]
+    const spotInfo = useSelector((state) => state?.spots[id]
     )
     if (!spotInfo || (spotInfo && !spotInfo.Owner)) return 'LOADING > > >'
     const owner = spotInfo.Owner
-    let ownspot = (user.id === owner.id) ? true : false
+    let ownspot = (user?.id === owner?.id) ? true : false
     const imageCarousel = [{url: spotInfo.previewImage}]
     spotInfo.SpotImages.forEach((image) => imageCarousel.push(image))
 

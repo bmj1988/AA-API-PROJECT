@@ -13,7 +13,7 @@ const PriceButton = ({ spot, user }) => {
     const [days, setDays] = useState(null)
     const [total, setTotal] = useState(null)
     const [grandTotal, setGrandTotal] = useState(null)
-
+    spotInfo.price = Number(spotInfo.price)
 
     useEffect(() => {
         if (startDate && endDate) {
