@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
 import './SpotModal.css';
-import { useModal } from '../../../context/Modal'
 import { datesArray } from '../../../store/stay';
 import { useEffect, useState } from 'react';
 
