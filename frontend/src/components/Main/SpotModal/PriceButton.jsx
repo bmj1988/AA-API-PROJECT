@@ -36,7 +36,7 @@ const PriceButton = ({ spot, user }) => {
             startDate,
             endDate,
             spotId: spot.id,
-            userId: user.id
+            userId: user?.id || 0,
         }
         navigate(`/book/${spotInfo.id}`, { state: { booking: reservation } })
 

@@ -13,7 +13,7 @@ const BookingPage = () => {
     const { state } = useLocation();
     let { spotId } = useParams();
     const navigate = useNavigate();
-    let user = useSelector((state) => state.session.user)
+    let user = useSelector((state) => state.session?.user)
     const [startDate, setStartDate] = useState(state?.stay?.startDate)
     const [endDate, setEndDate] = useState(state?.stay?.endDate)
     const [created, setCreated] = useState(false)

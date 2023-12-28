@@ -43,24 +43,6 @@ const deleteUserBooking = (bookingId) => {
 
 /// THUNKS
 
-export const thunkManageBookings = () => async (dispatch) => {
-
-    try {
-        dispatch(thunkGetOwnSpots())
-            .then((data) => data.Spots)
-            .then((array) => array.forEach((spot) => dispatch(thunkGetBookingsBySpot(spot.id))))
-            .then(() => dispatch(thunkGetUserBookings()))
-    }
-    catch (e) {
-        return (e)
-    }
-    /// refresh store with only user spots
-    /// get bookings for these spots
-    /// get bookings for the current user
-    ///
-    ///
-}
-
 export const thunkDateCheckerDisabledList = async (spotId) => {
     const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
     if (response.ok) {
@@ -112,6 +94,18 @@ export const thunkDeleteBooking = (bookingId) => async (dispatch) => {
     }
 }
 
+export const thunkManageBookings = () => async (dispatch) => {
+
+    try {
+        dispatch(thunkGetOwnSpots())
+            .then((data) => data.Spots)
+            .then((array) => array.forEach((spot) => dispatch(thunkGetBookingsBySpot(spot.id))))
+            .then(() => dispatch(thunkGetUserBookings()))
+    }
+    catch (e) {
+        return (e)
+    }
+}
 
 
 /// FUNCTIONS

@@ -70,11 +70,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
         group: ['Spot.id'],
     })
 
-    if (spots.length === 0) {
-        const err = new Error(`We couldn't find any spots owned by you`)
-        err.status = 404
-        return next(err)
-    }
+    // if (spots.length === 0) {
+    //     const err = new Error(`We couldn't find any spots owned by you`)
+    //     err.status = 404
+    //     return next(err)
+    // }
 
     res.json({ Spots: spots })
 })
@@ -242,7 +242,7 @@ router.post('/:spotId/bookings', [requireAuth, info, exists, userMatch, checkBoo
 
 /// Return a boolean indicating whether or not booking requested dates is possible
 
-router.post('/:spotId/availability', [requireAuth, checkBookingConflictsSPOT], async (req, res, next) => {
+router.post('/:spotId/availability', [checkBookingConflictsSPOT], async (req, res, next) => {
     const message = {
         available: true
     }

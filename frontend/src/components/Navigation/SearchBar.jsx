@@ -1,13 +1,11 @@
 import { useState } from 'react'
 import './Navigation.css'
-import { useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { thunkSpotSearch } from '../../store/spots';
 import { useSearch } from '../../context/Search';
 import FilterMenu from './FilterMenu';
 
 const SearchBar = () => {
-    const dispatch = useDispatch();
     const navigate = useNavigate();
     const [locality, setLocality] = useState('')
 
@@ -37,7 +35,7 @@ const SearchBar = () => {
         }
         console.log(Object.entries(searchObj))
         const params = new URLSearchParams(Object.entries(searchObj)).toString();
-        const searchedSpots = await dispatch(thunkSpotSearch(params))
+        const searchedSpots = await thunkSpotSearch(params)
         navigate(`/search?${params}`, { state: searchedSpots })
     }
 
