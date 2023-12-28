@@ -5,6 +5,7 @@ import { thunkSpotById } from "./spots"
 /// ACTION TYPES
 const LOADREVIEWS = 'reviews/LOAD'
 const DELETEREVIEW = 'reviews/DEL'
+const EDITREVIEW = 'reviews/EDIT'
 // const LOADUSERREVIEWS = 'reviews/user/LOAD'
 
 
@@ -27,6 +28,13 @@ const deleteReview = (reviewId) => {
     return {
         type: DELETEREVIEW,
         reviewId
+    }
+}
+
+const editReview = (review) => {
+    return {
+        type: EDITREVIEW,
+        review
     }
 }
 
@@ -97,6 +105,25 @@ export const thunkGetUserReviews = () => async (dispatch) => {
     }
 }
 
+export const thunkEditReview = (review) => async (dispatch) => {
+    const response = await csrfFetch(`/api/reviews/${review.id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({review: review.review, stars: review.stars})
+    })
+    if (response.ok) {
+        const review = await response.json();
+        dispatch(editReview(review))
+        return review
+    }
+    else {
+        const errors = await response.json()
+        return errors
+    }
+}
+
 /// REDUCER
 
 export const reviewReducer = (state = {}, action) => {
@@ -114,9 +141,14 @@ export const reviewReducer = (state = {}, action) => {
             delete reviewState[action.reviewId]
             return reviewState;
         }
-        // case LOADUSERREVIEWS: {
+        case EDITREVIEW: {
+            if (reviewState[action.review?.id]) {
+                reviewState[action.review?.id].review = action.review.review
+                reviewState[action.review?.id].stars = action.review.stars
+            }
+            return reviewState;
+        }
 
-        // }
         default: {
             return reviewState;
         }

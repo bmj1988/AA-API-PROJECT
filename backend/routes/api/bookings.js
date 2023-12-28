@@ -18,11 +18,11 @@ router.get('/current', requireAuth, async (req, res, next) => {
             }
         }
     })
-    if (bookings.length === 0) {
-        const err = new Error(`Couldn't find any bookings for this user`)
-        err.status = 404
-        return next(err)
-    }
+    // if (bookings.length === 0) {
+    //     const err = new Error(`Couldn't find any bookings for this user`)
+    //     err.status = 404
+    //     return next(err)
+    // }
     res.json({Bookings: bookings})
 })
 
@@ -46,6 +46,12 @@ router.delete('/:bookingId', [requireAuth, bookingAuthorize], async (req, res, n
     await booking.destroy()
     res.json({message: 'Successfully deleted'})
 
+})
+
+/// CHECK BOOKING
+
+router.post('/:bookingId/availability', [requireAuth, checkBookingConflictsBOOKING], async (req, res, next) => {
+    res.json({available: true})
 })
 
 module.exports = router;

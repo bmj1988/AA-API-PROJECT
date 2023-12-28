@@ -5,6 +5,7 @@ import { thunkDeleteReview } from '../../store/reviews';
 import OpenModalButton from '../OpenModalButton/OpenModalButton';
 import DeletePrompt from './DeletePrompt';
 import { useModal } from '../../context/Modal';
+import EditReviewFormModal from './EditReviewFormModal';
 
 const SingleReview = ({ review, userReviews }) => {
     const {modalView} = useModal();
@@ -35,6 +36,7 @@ const SingleReview = ({ review, userReviews }) => {
             </div>
             {(review.User.id === currentUser.id && modalView) && <button onClick={() => setDeletePrompt(true)}>Delete</button>}
             {(review.User.id === currentUser.id && !modalView) && <OpenModalButton modalComponent={<DeletePrompt review={review}/>} buttonText={'Delete'}/>}
+            {(review.User.id === currentUser.id && !modalView) && <OpenModalButton modalComponent={<EditReviewFormModal reviewToEdit={review}/>} buttonText={'Edit'}/>}
             {deletePrompt && <div>
                 <h3 className='textmark'>Are you sure you want to delete this review?</h3>
                 <button className='deleteButton yes' autoFocus onClick={(e) => deleteReview(e)}>{'Yes, (Delete Review)'}</button>

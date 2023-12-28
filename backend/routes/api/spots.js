@@ -240,4 +240,13 @@ router.post('/:spotId/bookings', [requireAuth, info, exists, userMatch, checkBoo
     res.json(booking)
 })
 
+/// Return a boolean indicating whether or not booking requested dates is possible
+
+router.post('/:spotId/availability', [requireAuth, checkBookingConflictsSPOT], async (req, res, next) => {
+    const message = {
+        available: true
+    }
+    res.json(message)
+})
+
 module.exports = router;
