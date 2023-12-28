@@ -58,7 +58,7 @@ const PriceButtonOnModal = ({ spot }) => {
                 {endDate && <p style={{ textAlign: 'end' }}>End Date: {endDate.toLocaleDateString('en-US')} </p>}
             </div>
             <div className='priceButtonInfo'>
-                <p>{`$`} <span style={{ fontSize: '20px', fontWeight: 'bold' }}>{`${(spotInfo.price).toFixed(2)}`}</span>{` per night`}</p>
+                <p>{`$`} <span style={{ fontSize: '20px', fontWeight: 'bold' }}>{`${Number(spotInfo.price).toFixed(2)}`}</span>{` per night`}</p>
                 <div className={`starRating`}>
                     <i className="fa-solid fa-star" />{`${spotInfo.avgRating || `New`}  ${reviewCase || ''}`}
                 </div>
@@ -68,7 +68,7 @@ const PriceButtonOnModal = ({ spot }) => {
             </div>
             {startDate && endDate && total && grandTotal && <div className='priceDiv'>
                 <div className='priceItem'>
-                    <p>{`$${(spotInfo.price).toFixed(2)} x ${days} nights`}</p>
+                    <p>{`$${Number(spotInfo.price).toFixed(2)} x ${days} nights`}</p>
                     <p style={{ textAlign: 'end' }}>${(Number(spotInfo.price) * Number(days)).toFixed(2)}</p>
                 </div>
                 <div className='priceItem lastPrice'>
@@ -76,7 +76,7 @@ const PriceButtonOnModal = ({ spot }) => {
                     <p style={{ textAlign: 'end' }}>${(Number(total) * .15).toFixed(2)}</p>
                 </div>
                 <div className='priceTotal'>
-                    <p className='textmark'>Total before taxes</p><p style={{ fontWeight: 'bold', textAlign: 'end' }} className='textmark larger'>${grandTotal.toFixed(2)}</p>
+                    <p className='textmark'>Total before taxes</p><p style={{ fontWeight: 'bold', textAlign: 'end' }} className='textmark larger'>${Number(grandTotal).toFixed(2)}</p>
                 </div>
 
             </div>}
