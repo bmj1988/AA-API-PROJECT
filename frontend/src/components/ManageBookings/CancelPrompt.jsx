@@ -5,7 +5,7 @@ import { thunkDeleteBooking } from "../../store/bookings";
 const CancelPrompt = ({ bookingId }) => {
     const dispatch = useDispatch();
     const { closeModal} = useModal();
-    const cancelBooking = async (e) => {
+    const cancelBooking = async () => {
         await dispatch(thunkDeleteBooking(bookingId))
         closeModal();
     }
@@ -17,7 +17,7 @@ const CancelPrompt = ({ bookingId }) => {
                 <div style={{ background: 'white', padding: '10px' }}>
                     <h3 className='textmark'>Are you sure you want to cancel this booking?</h3>
                     <p style={{ textAlign: 'center' }}>Cancellation fees may apply</p>
-                    <button className='deleteButton yes' autoFocus onClick={(e) => cancelBooking(e)}>{'Yes, (Cancel Booking)'}</button>
+                    <button className='deleteButton yes' autoFocus onClick={() => cancelBooking()}>{'Yes, (Cancel Booking)'}</button>
                     <button className='deleteButton no' onClick={() => closeModal()}>{'No, (Keep Booking)'}</button>
                 </div>
             </form>

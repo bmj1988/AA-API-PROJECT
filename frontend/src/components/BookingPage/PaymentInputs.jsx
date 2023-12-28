@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { usePaymentInputs } from 'react-payment-inputs';
 
 export default function PaymentInputs() {

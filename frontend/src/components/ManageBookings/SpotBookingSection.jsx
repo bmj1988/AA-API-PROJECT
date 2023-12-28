@@ -1,15 +1,11 @@
 // import { useEffect } from "react"
 import SingleBooking from "./SingleBooking"
-import { useDispatch, useSelector } from "react-redux"
+import { useSelector } from "react-redux"
 // import { thunkSpotById } from "../../store/spots";
 
 const SpotBookingSection = ({ spotBookings }) => {
-    const dispatch = useDispatch();
     const bookingArray = Object.values(spotBookings)
     const spotId = bookingArray[0].spotId
-    // useEffect(() => {
-    //     dispatch(thunkSpotById(spotId))
-    // }, [dispatch, spotId])
     const spot = useSelector((state) => state.spots[spotId])
 
     return (

@@ -4,7 +4,7 @@ const OpenModalSpan = ({ modalComponent, spanText, onSpanClick, onModalClose }) 
     const { setModalContent, setOnModalClose } = useModal();
 
     const handleClick = () => {
-        if (typeof onItemClick === 'function') onItemClick();
+        if (typeof onSpanClick === 'function') onSpanClick();
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
     }

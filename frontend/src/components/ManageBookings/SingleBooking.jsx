@@ -1,6 +1,6 @@
 import './managebookings.css'
 
-const SingleBooking = ({ booking, spot }) => {
+const SingleBooking = ({ booking }) => {
     const createdAtDate = new Date(booking?.createdAt).toLocaleDateString()
 
     return (

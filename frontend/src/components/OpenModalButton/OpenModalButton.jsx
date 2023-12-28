@@ -8,10 +8,9 @@ const OpenModalButton = ({modalComponent, buttonText, onButtonClick, onModalClos
         if (onModalClose) setOnModalClose(onModalClose);
         setModalContent(modalComponent);
     }
-    let cssStyling = ''
-    if (buttonStyling) cssStyling = buttonStyling
+
     return (
-        <button style={{cursor: 'pointer'}} className={buttonStyling} onClick={handleClick}>
+        <button style={{cursor: 'pointer'}} className={buttonStyling || ''} onClick={handleClick}>
             {buttonText}
         </button>
     )

@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import { loadStayDates } from "../../store/stay";
 import { useDispatch } from "react-redux";
 import Flatpickr from 'react-flatpickr'
-import { csrfFetch } from "../../store/crsf";
 import { thunkDateCheckerDisabledList } from "../../store/bookings";
 
 const InPageDatePicker = ({ spotId }) => {
@@ -29,7 +28,6 @@ const InPageDatePicker = ({ spotId }) => {
             setDisabledList(formattedDates)
         }
         fastChecker();
-        console.log(`disabled thunk ran`, disabledList)
     }, [dispatch, spotId])
     // const spotBookings = csrfFetch(`/api/spots/${spotId}/bookings`).then((data) => data.json()).then((data) => console.log(`Spot bookings`, data.Bookings))
 
@@ -52,7 +50,7 @@ const InPageDatePicker = ({ spotId }) => {
 
                 }}
 
-                onValueUpdate={(selectedDates, dateStr, instance) => {
+                onValueUpdate={(selectedDates) => {
                     if (selectedDates.length === 2) {
                         setStartDate(selectedDates[0])
                         setEndDate(selectedDates[1])

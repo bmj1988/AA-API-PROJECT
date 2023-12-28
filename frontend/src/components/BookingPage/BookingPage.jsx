@@ -83,7 +83,7 @@ const BookingPage = () => {
         <div>
             <h1 className="textmark">Success!</h1>
             <p className="standardP textmark">Your booking was successfully created. Enjoy your stay!</p>
-            <p className="standardP textmark"><span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={(e) => navigate('/')}>Return to our homepage</span> or <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={(e) => navigate('/bookings')}>Manage your bookings</span></p>
+            <p className="standardP textmark"><span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={() => navigate('/')}>Return to our homepage</span> or <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={() => navigate('/bookings')}>Manage your bookings</span></p>
         </div>
     )
 }

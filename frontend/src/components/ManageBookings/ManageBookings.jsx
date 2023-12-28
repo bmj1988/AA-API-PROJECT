@@ -34,7 +34,7 @@ const ManageBookings = () => {
                     {reservations.length > 0 && reservations.map((reservation) => {
                         return <SingleStay key={reservation.id} booking={reservation} />
                     })}
-                    {reservations.length < 1 && <p>You have no reservations booked. <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={(e) => navigate('/')}>Check out some spots!</span></p>}
+                    {reservations.length < 1 && <p>You have no reservations booked. <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={() => navigate('/')}>Check out some spots!</span></p>}
                 </div>
             </div>
         </div>

@@ -4,8 +4,7 @@ import { useModal } from '../../../context/Modal'
 import { datesArray } from '../../../store/stay';
 import { useEffect, useState } from 'react';
 
-const PriceButtonOnModal = ({ spot, user }) => {
-    const { closeModal } = useModal();
+const PriceButtonOnModal = ({ spot }) => {
     const spotInfo = useSelector((state) => state.spots[spot.id])
     const [startDate, endDate] = useSelector(datesArray)
     const [days, setDays] = useState(null)
@@ -28,16 +27,16 @@ const PriceButtonOnModal = ({ spot, user }) => {
         if (total) setGrandTotal(total + (total * .15))
     }, [total])
 
-    const reserveDates = (e) => {
-        e.preventDefault();
-        const reservation = {
-            startDate,
-            endDate,
-            spotId: spot.id,
-            userId: user.id
-        }
-        closeModal();
-    }
+    // const reserveDates = (e) => {
+    //     e.preventDefault();
+    //     const reservation = {
+    //         startDate,
+    //         endDate,
+    //         spotId: spot.id,
+    //         userId: user.id
+    //     }
+    //     closeModal();
+    // }
 
     const reserve = (e) => {
         e.preventDefault();

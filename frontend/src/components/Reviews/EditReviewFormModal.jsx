@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { thunkAddReview, thunkEditReview } from "../../store/reviews"
+import { thunkEditReview } from "../../store/reviews"
 import { useDispatch } from "react-redux"
 import './Reviews.css'
 import { useModal } from "../../context/Modal"

@@ -10,7 +10,6 @@ import { parseBookingDate } from '../../../store/bookings';
 
 const DateChecker = ({ spotId, bookingId }) => {
     const dispatch = useDispatch();
-    const userId = useSelector((state) => state.session.user.id)
     const stayState = useSelector((state) => state.stay)
     const [startDate, setStartDate] = useState(stayState?.startDate || new Date());
     const [endDate, setEndDate] = useState(stayState?.endDate || new Date());
@@ -117,7 +116,7 @@ const DateChecker = ({ spotId, bookingId }) => {
 
                         }}
                         onChange={() => setAvailable(null)}
-                        onValueUpdate={(selectedDates, dateStr, instance) => {
+                        onValueUpdate={(selectedDates) => {
                             setStartDate(selectedDates[0]);
                             setEndDate(selectedDates[1]);
                         }}
