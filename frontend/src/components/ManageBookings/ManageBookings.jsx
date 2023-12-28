@@ -25,7 +25,7 @@ const ManageBookings = () => {
                     {spotReservations.length > 0 && spotReservations.map((singleSpotsBookings) => {
                         return <SpotBookingSection key={Object.values(singleSpotsBookings)[0].id} spotBookings={singleSpotsBookings} />
                     })}
-                    {spotReservations.length < 1 && <p>You have no reservations booked at your spots. <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={() => navigate('/manageSpots')}>Manage your spots!</span></p>}
+                    {spotReservations.length < 1 && <p>You have no reservations booked at your spots. <span style={{ textDecoration: 'underline #1bcdd0', cursor: 'pointer' }} onClick={() => navigate('/current')}>Manage your spots!</span></p>}
                 </div>
             </div>
             <div>

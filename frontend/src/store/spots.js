@@ -169,6 +169,7 @@ export const thunkDeleteSpotImage = (imageId, spotId) => async (dispatch) => {
 export const thunkSpotSearch = async (params) => {
     try {const response = await csrfFetch(`api/spots?${params}`)
     if (response.ok) {
+        console.log(response)
         const searchedSpots = await response.json()
         return searchedSpots
     }}

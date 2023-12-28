@@ -18,9 +18,9 @@ const ManageSpots = () => {
     const [ownSpotsLoaded, setOnSpotsLoaded] = useState(false)
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const user = useSelector((state) => state.session.user)
+    const user = useSelector((state) => state.session?.user)
     const spots = useSelector(spotsArray)
-    const ownSpots = spots.filter((spot) => spot.ownerId === user.id)
+    const ownSpots = spots?.filter((spot) => spot.ownerId === user?.id)
     useEffect(() => {
         if (ownSpotsLoaded) return
         dispatch(thunkGetOwnSpots())
@@ -45,7 +45,7 @@ const ManageSpots = () => {
                 {!modalView && <button onClick={() => navigate('../createSpot')}>Create a New Spot</button>}
             </div>
             <div className='mainDiv' style={{ marginLeft: '10px' }}>
-                {ownSpots.map((spot) => {
+                {ownSpots?.map((spot) => {
                     return (
                         <div className='tooltip' key={spot.id}>
                             <button className={'spotButton'}>

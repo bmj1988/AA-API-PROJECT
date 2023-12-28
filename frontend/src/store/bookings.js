@@ -44,14 +44,19 @@ const deleteUserBooking = (bookingId) => {
 /// THUNKS
 
 export const thunkDateCheckerDisabledList = async (spotId) => {
-    const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
-    if (response.ok) {
-        const spotBookings = await response.json()
-        return spotBookings.Bookings
+    try {
+        const response = await csrfFetch(`/api/spots/${spotId}/bookings`)
+        if (response.ok) {
+            const spotBookings = await response.json()
+            return spotBookings.Bookings
+        }
+        else {
+            const error = await response.json();
+            return error
+        }
     }
-    else {
-        const error = response.json();
-        return error
+    catch (e) {
+        console.log(e)
     }
 }
 
@@ -116,10 +121,10 @@ export const editBookingFetch = async (booking) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({startDate: booking.startDate, endDate: booking.endDate})
+        body: JSON.stringify({ startDate: booking.startDate, endDate: booking.endDate })
     })
     if (response.ok) {
-        return {message: 'Booking successfully edited'}
+        return { message: 'Booking successfully edited' }
     }
     else {
         const error = await response.json();

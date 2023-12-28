@@ -5,15 +5,15 @@ import SpotModal from '../Main/SpotModal/SpotModal'
 
 const SearchPage = () => {
     const { state } = useLocation();
-    const searchedSpotsArray = state.Spots;
+    const searchedSpotsArray = state?.Spots;
 
     return (
         <>
-        <h1 className="textmark" style={{position:'sticky', top: '100px', backgroundColor:'white',zIndex: '5', marginBottom: '10px'}}>Search Results</h1>
+        <h1 className="textmark" style={{position:'sticky', top: '100px', backgroundColor:'white',zIndex: '4', marginBottom: '10px'}}>Search Results</h1>
         <div className='masterDiv'>
 
         <div className='mainDiv'>
-            {searchedSpotsArray.map((spot) => {
+            {searchedSpotsArray?.length > 0 && searchedSpotsArray?.map((spot) => {
                 return (
                     <div className='tooltip' key={spot.id}>
                         <button className={'spotButton'}>
@@ -23,6 +23,9 @@ const SearchPage = () => {
                     </div>
                 )
             })}
+            {searchedSpotsArray?.length < 0 && <div>
+                <h3>No spots were found that match your search</h3>
+                </div>}
         </div>
     </div>
     </>

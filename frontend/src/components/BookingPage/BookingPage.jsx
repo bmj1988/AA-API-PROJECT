@@ -69,7 +69,7 @@ const BookingPage = () => {
             </div>}
             {!user && <div name='login'>
                 <p className="textmark standardP">Please <OpenModalSpan spanText='login' modalComponent={<LoginFormModal />} /> to complete booking.</p>
-                <p className="textmark standardP">{` Don&apost have an account? `}<OpenModalSpan spanText='Sign up here.' modalComponent={<SignupFormModal />} /></p>
+                <p className="textmark standardP">{` Don&apos;t have an account? `}<OpenModalSpan spanText='Sign up here.' modalComponent={<SignupFormModal />} /></p>
             </div>
             }
             {errors && Object.values(errors).length && Object.values(errors).map((error) => {
