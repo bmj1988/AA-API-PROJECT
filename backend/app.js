@@ -43,6 +43,7 @@ app.use('*review-images*', (req, res, next) => {
     req.imageType = 'review'
     next()
 })
+
 app.use(routes)
 
 app.use((_req, _res, next) => {

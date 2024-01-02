@@ -63,6 +63,7 @@ const HomeIcon = ({ user }) => {
                         <NavLink to="/current" className={'unstyled'}>Manage Spots</NavLink>
                         <NavLink to="/reviews" className={'unstyled'}>Manage Reviews</NavLink>
                         <NavLink to="/bookings" className={'unstyled'}>Manage Bookings</NavLink>
+                        <i className="fa-solid fa-envelope fa-lg" style={{color:' #1bcdd0', padding: '15px', cursor: 'pointer'}} onClick={() => navigate('/messages')}/>
                         <li>
                             <button onClick={logout}>Log Out</button>
                         </li>

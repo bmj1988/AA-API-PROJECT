@@ -148,7 +148,7 @@ router.post('/:spotId/images', [requireAuth, requireAuthorizeSpot], async (req, 
 /// EDIT A SPOT
 
 router.put('/:spotId', [requireAuth, requireAuthorizeSpot], async (req, res, next) => {
-    /// if not picked up by validation error handler, implement try/catch
+
     const spot = await Spot.findByPk(req.params.spotId, {
         attributes: {
             exclude: ['previewImage']

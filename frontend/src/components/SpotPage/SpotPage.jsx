@@ -7,6 +7,7 @@ import { useEffect } from "react";
 import { thunkSpotById } from "../../store/spots";
 import OpenModalImage from "./OpenModalImage";
 import ImageDisplay from "./ImageDisplay";
+import Spinner from "../Spinner";
 
 import InPageDatePicker from "./InPageDatePicker";
 
@@ -24,12 +25,15 @@ const SpotPage = () => {
 
     const spotInfo = useSelector((state) => state?.spots[id]
     )
-    if (!spotInfo || (spotInfo && !spotInfo.Owner)) return 'LOADING > > >'
+    if (!spotInfo || (spotInfo && !spotInfo.Owner)) return <Spinner/>
     const owner = spotInfo.Owner
     let ownspot = (user?.id === owner?.id) ? true : false
     const imageCarousel = [{url: spotInfo.previewImage}]
     spotInfo.SpotImages.forEach((image) => imageCarousel.push(image))
 
+    const reply = (e) => {
+
+    }
 
     return (
         <div className={'spotPageContainer'}>
@@ -45,7 +49,7 @@ const SpotPage = () => {
             </div>
             <div className="bioButtonContainer">
                 <div className="bio">
-                    <h2>{`Hosted by ${owner.firstName} ${owner.lastName}`}</h2>
+                    <h2>{`Hosted by ${owner.firstName} ${owner.lastName}`}{!ownspot && <i className="fa-solid fa-envelope larger colormark messageButton" style={{ cursor: 'pointer' }} onClick={(e) => reply(e)} />}</h2>
                     <div style={{ display: 'flex', justifyContent: 'space-between', width: '950px' }}>
                         <p className='bioText'>{spotInfo.description}</p>
                         {!ownspot && <PriceButton spot={{ ...spotInfo }} user={user} style={{ alignSelf: 'center' }} className='priceButtonComponent'/>}

@@ -15,6 +15,10 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Booking, {foreignKey: 'userId', onDelete: 'CASCADE'})
 
       User.hasMany(models.Review, {foreignKey: 'userId', onDelete: 'CASCADE'})
+
+      User.hasMany(models.Message, {foreignKey: 'fromId', onDelete:'CASCADE', as: 'sender'})
+
+      User.hasMany(models.Message, {foreignKey: 'toId', onDelete:'CASCADE', as: 'recipient'})
     }
   }
   User.init({

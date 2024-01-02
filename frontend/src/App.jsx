@@ -13,6 +13,7 @@ import SearchPage from './components/SearchPage/SearchPage.jsx';
 import BookingPage from './components/BookingPage/BookingPage.jsx';
 import ManageBookings from './components/ManageBookings/ManageBookings.jsx';
 import EditBookingPage from './components/BookingPage/EditBookingPage.jsx';
+import MessageCenter from './components/Messaging/MessageCenter.jsx';
 
 
 const Layout = () => {
@@ -101,6 +102,10 @@ const router = createBrowserRouter([
             element: <EditBookingPage />
           }
         ]
+      },
+      {
+        path: '/messages',
+        element: <MessageCenter />
       }
     ]
   },
